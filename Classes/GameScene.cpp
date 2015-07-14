@@ -152,11 +152,6 @@ void GameScene::gameCallback(Ref *sender)
 		this->getChildByName("1.LAYER_MEMBER")->setVisible(false);
 
 
-		//this->getChildByTag(GameMode::MEMBER_MODE)->removeChild(MemberManager, false);
-		/*dynamic_cast<cocos2d::ui::ScrollView*>(this->getChildByTag(GameMode::MEMBER_MODE))
-		->scrollToPercentVertical(0, 1, false);*/
-		//this->getChildByTag(GameMode::NORMAL_MODE)->addChild(MemberManager);
-
 		// change member layer
 		this->getChildByName("1.LAYER_MEMBER")->getChildByName("2.MEMBER_SCROLL")
 			->removeChild(GuildMemberManager::getInstance()
@@ -207,8 +202,4 @@ void GameScene::addMember(int const dex)
 	ButtonList.push_back(menuitem);
 
 	GuildMemberManager::getInstance()->addMember(dex);
-
-	//ui::Button *button = ui::Button::create();
-	//Menu* menu = Menu::create();
-	//menu->
 }
