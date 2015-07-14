@@ -6,7 +6,7 @@
 
 USING_NS_CC;
 
-class Member : public Sprite
+class Member : public Node
 {
 public:
 	Member();
@@ -14,6 +14,8 @@ public:
 	virtual void update(float delta);
 	CREATE_FUNC(Member);
 	
+	void initLayer();
+	void initSprite(int dex);
 	void initType(int type1, int type2);
 
 
@@ -26,6 +28,7 @@ public:
 	Point getPosition() { return Position; }
 	Point tileCoordForPosition(Point position);
 private:
+	Sprite* NormalSprite;
 	int Mode;
 	Rect BoxCollision;
 	Point Position;

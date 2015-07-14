@@ -59,10 +59,8 @@ void GuildMemberManager::changeMode(int mode)
 	{
 	case GameMode::NORMAL_MODE:
 	{
-		//this->getChildByTag(VisibleList::MEMBER_BUTTON)->setVisible(false);
 		for (iter = MemberList.begin(); iter != MemberList.end(); iter++)
 		{
-			//this->getChildByTag(VisibleList::MEMBER_BUTTON)->setVisible(false);
 			(*iter)->setPositionY((*iter)->getPositionY() - 600);
 			(*iter)->stopAllActions();
 			(*iter)->changeMode(mode);
@@ -72,13 +70,11 @@ void GuildMemberManager::changeMode(int mode)
 	case GameMode::MEMBER_MODE:
 	{
 		MemberList.sort(Compare);
-		//this->getChildByTag(VisibleList::MEMBER_BUTTON)->setVisible(true);
 		for (iter = MemberList.begin(); iter != MemberList.end(); iter++)
 		{
-			//this->getChildByTag(VisibleList::MEMBER_BUTTON)->setVisible(true);
 			(*iter)->changeMode(mode);
 			(*iter)->setPositionY((*iter)->getPosition().y + 600);
-			Point ActionPoint = { 25.0f, 900.0f - support_y * 42 };
+			Point ActionPoint = { 25.0f, 478.0f - support_y * 42 };
 			auto moveAction = MoveTo::create(1.0f, ActionPoint);
 			auto scaleAction = ScaleTo::create(1.0f, 2.0f);
 			auto spawnAction = Spawn::create(moveAction, scaleAction, NULL);

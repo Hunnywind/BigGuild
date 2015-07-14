@@ -13,10 +13,7 @@ Member::Member()
 
 bool Member::init()
 {
-	if (!Sprite::init())
-	{
-		return false;
-	}
+	this->setGlobalZOrder(1);
 
 	Stat.name = "MISSINGNO";
 	auto group = MapManager::getInstance()->getTilemap()->getObjectGroup("Spawn");
@@ -29,41 +26,62 @@ bool Member::init()
 	this->setAnchorPoint(Point(0.5f, 0.5f));
 	this->setPosition(Position);
 
-	auto Menulayer = Layer::create();
-	Menulayer->setTag(GameMode::MEMBER_MODE);
-	Menulayer->setVisible(false);
-	Menulayer->setAnchorPoint(Point(0.5, 0.5));
-	Menulayer->setName("LAYER_STAT");
-	this->addChild(Menulayer);
+	//
 
-	this->setGlobalZOrder(1);
-	
-	auto label = Label::createWithSystemFont("Lv", "Thonburi", 11);
-	label->setColor(Color3B::BLACK);
-	label->setPosition(36.0f, 10.0f);
-	label->setName("LV");
-	Menulayer->addChild(label);
+	//
+	//
+	//auto label = Label::createWithSystemFont("Lv", "Thonburi", 11);
+	//label->setColor(Color3B::BLACK);
+	//label->setPosition(36.0f, 10.0f);
+	//label->setName("LV");
+	//Menulayer->addChild(label);
 
-	Stat.level = RandomHelper::random_int(1, 20);
-	std::string level = std::to_string(Stat.level);
-	auto flevel = Label::createWithSystemFont(level, "Thonburi", 11);
-	flevel->setName("LEVEL");
-	flevel->setColor(Color3B::BLACK);
-	flevel->setPosition(48.0f, 10.0f);
-	Menulayer->addChild(flevel);
+	//Stat.level = RandomHelper::random_int(1, 20);
+	//std::string level = std::to_string(Stat.level);
+	//auto flevel = Label::createWithSystemFont(level, "Thonburi", 11);
+	//flevel->setName("LEVEL");
+	//flevel->setColor(Color3B::BLACK);
+	//flevel->setPosition(48.0f, 10.0f);
+	//Menulayer->addChild(flevel);
 
-	auto fname = Label::createWithSystemFont(Stat.name, "Thonburi", 11);
-	fname->setColor(Color3B::BLACK);
-	fname->setPosition(92.0f, 10.0f);
-	fname->setName("NAME");
-	Menulayer->addChild(fname);
+	//auto fname = Label::createWithSystemFont(Stat.name, "Thonburi", 11);
+	//fname->setColor(Color3B::BLACK);
+	//fname->setPosition(92.0f, 10.0f);
+	//fname->setName("NAME");
+	//Menulayer->addChild(fname);
+
+	//auto blankBar = Sprite::create("res/exp1.png");
+	//blankBar->setPosition(114.0f, -5.0f);
+	//blankBar->setScale(0.5f);
+	//DetailLayer->addChild(blankBar);
+
+
 
 	this->scheduleUpdate();
 	this->schedule(schedule_selector(Member::actionMake), 0.1f);
 
-	initType(0,0);
+	this->initType(0,0);
 
 	return true;
+}
+
+void Member::initLayer()
+{
+	auto Menulayer = Layer::create();
+	Menulayer->setVisible(false);
+	this->addChild(Menulayer, 0, "LAYER_STAT");
+
+	auto DetailLayer = Layer::create();
+	DetailLayer->setVisible(false);
+	this->addChild(DetailLayer, 0, "LAYER_DETAIL");
+
+}
+
+Sprite* Member::initSprite(int dex)
+{
+	// json
+	Sprite* character = Sprite::create("Pokemon_37.gif");
+	return character;
 }
 
 void Member::initType(int type1 = 0, int type2 = 0)
@@ -181,7 +199,8 @@ void Member::changeMode(int mode)
 			Position.y = this->getPositionY();
 		}
 		this->stopAllActions();
-		this->getChildByTag(GameMode::MEMBER_MODE)->setVisible(true);
+		this->getChildByName("LAYER_STAT")->setVisible(true);
+		this->getChildByName("LAYER_DETAIL")->setVisible(false);
 		break;
 	}
 	case GameMode::NORMAL_MODE:
@@ -192,10 +211,13 @@ void Member::changeMode(int mode)
 		auto spawnAction = Spawn::create(returnAction, scaleAction, NULL);
 		spawnAction->setTag(MoveList::ACTION_RETURN);
 		this->runAction(spawnAction);
-		this->getChildByTag(GameMode::MEMBER_MODE)->setVisible(false);
+		this->getChildByName("LAYER_STAT")->setVisible(false);
+		this->getChildByName("LAYER_DETAIL")->setVisible(false);
+		break;
 	}
 	case GameMode::DETAILMEMBER_MODE:
 	{
+		this->getChildByName("LAYER_DETAIL")->setVisible(true);
 		this->setPosition(40, 294);
 		
 
@@ -219,6 +241,7 @@ void Member::changeMode(int mode)
 			->setPosition(24.0f, -6.0f);
 		this->getChildByName("LAYER_STAT")->getChildByName("NAME")
 			->setPosition(120.0f, 10.0f);
+		break;
 
 	}
 	}

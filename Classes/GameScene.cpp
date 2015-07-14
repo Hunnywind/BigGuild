@@ -46,8 +46,8 @@ void GameScene::initLayers()
 
 	ui::ScrollView *scroll = ui::ScrollView::create();
 	scroll->setDirection(ui::ScrollView::Direction::VERTICAL);
-	scroll->setContentSize(Size(450, 800));
-	scroll->setInnerContainerSize(Size(450, 1400));
+	scroll->setContentSize(Size(450, 320));
+	//scroll->setInnerContainerSize(Size(450, 1400));
 	MemberLayer->addChild(scroll, 0, "2.MEMBER_SCROLL");
 
 	auto ScrollButtonMenu = Menu::create();
@@ -68,6 +68,17 @@ void GameScene::initLayers()
 	this->addMember(0);
 	this->addMember(0);
 	this->addMember(0);
+	this->addMember(0);
+	this->addMember(0);
+	this->addMember(0);
+	this->addMember(0);
+	this->addMember(0);
+	this->addMember(0);
+	this->addMember(0);
+	this->addMember(0);
+	this->addMember(0);
+	this->addMember(0);
+
 }
 
 void GameScene::initMenu()
@@ -130,8 +141,8 @@ void GameScene::gameCallback(Ref *sender)
 		for (iter = ButtonList.begin(); iter != ButtonList.end(); iter++)
 		{
 			auto fadeinAction = FadeIn::create(1.0f);
-			(*iter)->setPositionY(345.0f - support_y * 42);
-			(*iter)->setPositionX(-40.0f);
+			(*iter)->setPositionY(42 - support_y * 42 + -120);
+			(*iter)->setPositionX(-36.0f);
 			(*iter)->setOpacity(0);
 			(*iter)->runAction(fadeinAction);
 			support_y++;
@@ -200,6 +211,12 @@ void GameScene::addMember(int const dex)
 		->getChildByName("3.MEMBER_SCROLL_BUTTON")
 		->addChild(menuitem);
 	ButtonList.push_back(menuitem);
+
+	int scrollsize = ButtonList.size() * menuitem->getScaleY() + 500;
+	dynamic_cast<cocos2d::ui::ScrollView*>(this->getChildByName("1.LAYER_MEMBER")
+		->getChildByName("2.MEMBER_SCROLL"))
+		->setInnerContainerSize(Size(450, scrollsize));
+
 
 	GuildMemberManager::getInstance()->addMember(dex);
 }
