@@ -19,6 +19,12 @@
     <Filter Include="src\Unit">
       <UniqueIdentifier>{0c5583fb-b76e-464a-8de1-09c636987acb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\OtherCode">
+      <UniqueIdentifier>{28c9eb22-028b-44bf-9f00-d3ff211b9cc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Component">
+      <UniqueIdentifier>{0f97abee-ecec-4a61-a2eb-b7436dfd63b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -30,9 +36,6 @@
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MenuScene.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\GameScene.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
@@ -43,6 +46,30 @@
       <Filter>src\Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MapManager.cpp">
+      <Filter>src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MemberScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RScrollViewController.cpp">
+      <Filter>src\OtherCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RScrollViewItem.cpp">
+      <Filter>src\OtherCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MenuScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DetailScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MissionScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MissionManager.cpp">
       <Filter>src\Manager</Filter>
     </ClCompile>
   </ItemGroup>
@@ -76,6 +103,27 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Structs.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MemberScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RScrollViewController.h">
+      <Filter>src\OtherCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RScrollViewItem.h">
+      <Filter>src\OtherCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DetailScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MissionScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MissionManager.h">
+      <Filter>src\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

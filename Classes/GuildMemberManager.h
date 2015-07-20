@@ -2,6 +2,9 @@
 
 #include "cocos2d.h"
 #include <list>
+#include "Enum.h"
+#include "Structs.h"
+
 USING_NS_CC;
 class Member;
 
@@ -11,16 +14,24 @@ class GuildMemberManager
 public:
 	~GuildMemberManager(){}
 	static GuildMemberManager* getInstance();
-
-	Layer* initMemberLayer();
+	BasicInfo getBasicInfo(int num);
+	Ability getAbilityInfo(int num);
+	void initMemberLayer();
 	Layer* getMemberLayer() { return MemberLayer; }
-	virtual bool init();
+	std::string getTypeFilename(TypeList Type);
+	bool init();
 	void addMember(int dex);
-	void changeMode(int mode);
+	void changeMode(GameMode mode);
+	int getMemberSize() { return MemberList.size(); }
 	void detailMember(int num);
+	int getDetailNum() { return DetailNum; }
+
+	void rememberPosition();
 private:
-	GuildMemberManager(){}
+	GuildMemberManager();
 
 	Layer* MemberLayer;
 	std::list<Member*> MemberList;
+
+	int DetailNum;
 };

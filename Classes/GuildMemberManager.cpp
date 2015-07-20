@@ -11,6 +11,11 @@ bool Compare(Member* elem1, Member* elem2)
 
 	return false;
 }
+
+GuildMemberManager::GuildMemberManager()
+{
+	this->init();
+}
 GuildMemberManager* GuildMemberManager::getInstance()
 {
 	static GuildMemberManager* instance = NULL;
@@ -26,42 +31,81 @@ bool GuildMemberManager::init()
 		addSpriteFramesWithFile("res/pokemon.plist");
 	SpriteFrameCache::getInstance()->
 		addSpriteFramesWithFile("res/type.plist");
+	this->initMemberLayer();
 
-	
+	this->addMember(0);
+	this->addMember(0);
+	this->addMember(0);
+	this->addMember(0);
+	this->addMember(0);
 	return true;
 }
-Layer* GuildMemberManager::initMemberLayer()
+
+void GuildMemberManager::initMemberLayer()
 {
 	MemberLayer = Layer::create();
 	MemberLayer->retain();
-	return MemberLayer;
 }
+
 void GuildMemberManager::addMember(int dex)
 {
 	// json
 	std::string filename = "Pokemon_37.gif";
 	auto Unit = Member::create();
-	Unit->setSpriteFrame(filename);
+	Unit->initSprite(filename);
+
 	MemberLayer->addChild(Unit);
-
-
 	MemberList.push_back(Unit);
 	
 }
 
-void GuildMemberManager::changeMode(int mode)
+BasicInfo GuildMemberManager::getBasicInfo(int num)
 {
 	std::list<Member*>::iterator iter = MemberList.begin();
-	
-	int support_y = 0;
+	for (int i = 0; i < num; i++)
+		iter++;
 
+	return (*iter)->getStat();
+}
+Ability GuildMemberManager::getAbilityInfo(int num)
+{
+	std::list<Member*>::iterator iter = MemberList.begin();
+	for (int i = 0; i < num; i++)
+		iter++;
+
+	return (*iter)->getAbil();
+}
+std::string GuildMemberManager::getTypeFilename(TypeList Type)
+{
+	if (TypeList::TYPE_DEFAULT == Type)
+		CCLOG("This Type is DEFAULT");
+
+	char filename[20] = "type";
+	char nation[20] = "E";
+	char num[20];
+	itoa(Type, num, 10);
+	char extension[20] = ".png";
+
+	strcat(num, extension);
+	strcat(filename, nation);
+	strcat(filename, num);
+
+	std::string returnValue = filename;
+	return returnValue;
+}
+
+void GuildMemberManager::changeMode(GameMode mode)
+{
+	std::list<Member*>::iterator iter = MemberList.begin();
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	int support_y = 0;
+	int revision = 0;
 	switch (mode)
 	{
-	case GameMode::NORMAL_MODE:
+	case GameMode::MAIN_MODE:
 	{
 		for (iter = MemberList.begin(); iter != MemberList.end(); iter++)
 		{
-			(*iter)->setPositionY((*iter)->getPositionY() - 600);
 			(*iter)->stopAllActions();
 			(*iter)->changeMode(mode);
 		}
@@ -73,30 +117,48 @@ void GuildMemberManager::changeMode(int mode)
 		for (iter = MemberList.begin(); iter != MemberList.end(); iter++)
 		{
 			(*iter)->changeMode(mode);
-			(*iter)->setPositionY((*iter)->getPosition().y + 600);
-			Point ActionPoint = { 25.0f, 478.0f - support_y * 42 };
-			auto moveAction = MoveTo::create(1.0f, ActionPoint);
+			(*iter)->getCharacter()->setPositionY(MemberList.size() * 40
+			- (*iter)->getPositionY());
+			if (4 > MemberList.size())
+			{
+				revision = 4 - MemberList.size();
+			}
+			Point Location = { 25.0f, MemberList.size() * 40 + visibleSize.height / 2 - 12
+				- 40 * support_y + revision * 40};
+			/*auto moveAction = MoveTo::create(1.0f, ActionPoint);
 			auto scaleAction = ScaleTo::create(1.0f, 2.0f);
 			auto spawnAction = Spawn::create(moveAction, scaleAction, NULL);
-			(*iter)->runAction(spawnAction);
+			(*iter)->getCharacter()->runAction(spawnAction);*/
+			(*iter)->getCharacter()->setPosition(Location);
+			(*iter)->getCharacter()->setScale(2.0f);
 			support_y++;
 		}
 		
 		break;
 	}
-	case GameMode::DETAILMEMBER_MODE:
+	case GameMode::DETAIL_MODE:
 	{
 		for (iter = MemberList.begin(); iter != MemberList.end(); iter++)
 		{
-			(*iter)->setVisible(false);
+			(*iter)->getCharacter()->setVisible(false);
 			(*iter)->stopAllActions();
-			(*iter)->setPositionY((*iter)->getPositionY() - 600);
+			//(*iter)->setPositionY((*iter)->getPositionY() - 600);
 		}
 		break;
 	}
 	}
 }
 
+void GuildMemberManager::rememberPosition()
+{
+	std::list<Member*>::iterator iter = MemberList.begin();
+
+	for (iter = MemberList.begin(); iter != MemberList.end(); iter++)
+	{
+		(*iter)->rememberPostion();
+		
+	}
+}
 void GuildMemberManager::detailMember(int num)
 {
 	std::list<Member*>::iterator iter = MemberList.begin();
@@ -104,6 +166,7 @@ void GuildMemberManager::detailMember(int num)
 	{
 		iter++;
 	}
-	(*iter)->setVisible(true);
-	(*iter)->changeMode(GameMode::DETAILMEMBER_MODE);
+	(*iter)->getCharacter()->setVisible(true);
+	(*iter)->changeMode(GameMode::DETAIL_MODE);
+	DetailNum = num;
 }

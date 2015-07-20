@@ -15,7 +15,7 @@ public:
 	Rect getBox(int i) { return boxCollision[i]; }
 	TMXTiledMap* getTilemap() { return tilemap; }
 private:
-	MapManager(){}
+	MapManager();
 	TMXTiledMap* tilemap;
 	Rect boxCollision[6];
 };

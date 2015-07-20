@@ -1,6 +1,9 @@
 #include "MapManager.h"
 
-
+MapManager::MapManager()
+{
+	this->init();
+}
 MapManager* MapManager::getInstance()
 {
 	static MapManager* instance = NULL;
@@ -14,6 +17,7 @@ void MapManager::init()
 {
 	tilemap = NULL;
 	tilemap = TMXTiledMap::create("res/TestMap.tmx");
+	tilemap->retain();
 
 	auto group = tilemap->getObjectGroup("Object Group 1");
 	auto& objects = group->getObjects();

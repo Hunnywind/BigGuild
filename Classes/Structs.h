@@ -1,15 +1,9 @@
 #pragma once
 #include "Enum.h"
-struct Properties
-{
-	int level;
-	int exp;
-	int expToLevelUp;
-	int activity;
-	std::string name;
-	int type1;
-	int type2;
 
+
+struct Ability
+{
 	int skill1;
 	int skill2;
 	int skill3;
@@ -18,8 +12,22 @@ struct Properties
 	int feature2;
 	int feature3;
 
-	Properties() : level(1), exp(0), expToLevelUp(0), activity(0), name("MISSINGNO"),
-		type1(TypeList::TYPE_DEFAULT), type2(TypeList::TYPE_DEFAULT),
-		skill1(0), skill2(0), skill3(0),
-		feature1(0), feature2(0), feature3(0){}
+	Ability() : skill1(0), skill2(0), skill3(0),
+		feature1(0), feature2(0), feature3(0)
+	{}
+};
+
+struct BasicInfo
+{
+	int level;
+	int exp;
+	int expToLevelUp;
+
+	std::string name;
+	TypeList type1;
+	TypeList type2;
+
+	BasicInfo() : level(0), exp(0), expToLevelUp(0),
+		name("MISSINGNO"), type1(TypeList::TYPE_DEFAULT), type2(TypeList::TYPE_DEFAULT)
+	{ }
 };
