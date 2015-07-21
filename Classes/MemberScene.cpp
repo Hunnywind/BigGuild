@@ -41,7 +41,7 @@ void MemberScene::initLayer()
 	scroll->setDirection(ui::ScrollView::Direction::VERTICAL);
 	scroll->setContentSize(Size(400, 320));
 	scroll->setInnerContainerSize(Size(400, GuildMemberManager::getInstance()->getMemberSize()
-		* 40 + visibleSize.height / 2));
+		* 40));
 	scroll->addChild(GuildMemberManager::getInstance()->getMemberLayer(),1);
 	this->addChild(scroll,0,"SCROLLVIEW");
 }
@@ -54,6 +54,8 @@ void MemberScene::initMenu()
 	auto menu = Menu::create(item_0, NULL);
 	menu->alignItemsVerticallyWithPadding(20);
 	menu->setPosition(Point(440, 300));
+
+	
 
 	this->getChildByName("LAYER_MENU")->addChild(menu);
 }
@@ -71,12 +73,12 @@ void MemberScene::initButton()
 		menuitem->setTag(ButtonList.size());
 		menuitem->setName("DETAIL_FUNCTION");
 		this->getChildByName("SCROLLVIEW")->addChild(menuitem);
-		if (4 > MemberNum)
+		if (8 > MemberNum)
 		{
-			revision = 4 - MemberNum;
+			revision = 8 - MemberNum;
 		}
 		menuitem->setPositionY(MemberNum
-			* 40 + visibleSize.height / 2 - 40 * i - 40 + revision * 40);
+			* 40  - 40 * i - 40 + revision * 40);
 		ButtonList.push_back(menuitem);
 
 		auto label = Label::createWithSystemFont("Lv", "Thonburi", 24);

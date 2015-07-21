@@ -21,10 +21,47 @@ MissionManager* MissionManager::getInstance()
 }
 bool MissionManager::init()
 {
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
 	return true;
 }
 
 void MissionManager::addMission(int dex)
 {
+	// json
+	Mission mission;
+	for (int i = 0; i < 5; i++)
+	{
+		mission.Enemy[i] = i;
+		mission.EnemySkillNumber[i] = 2;
+	}
+	MissionList.push_back(mission);
+}
 
+Mission MissionManager::getMission(int num)
+{
+	std::list<Mission>::iterator iter = MissionList.begin();
+	for (int i = 0; i < num; i++)
+	{
+		iter++;
+	}
+	return *iter;
 }

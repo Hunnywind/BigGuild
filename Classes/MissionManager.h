@@ -16,9 +16,9 @@ public:
 	static MissionManager* getInstance();
 	bool init();
 	void addMission(int dex);
+	Mission getMission(int num);
+	int getMissionSize() { return MissionList.size(); }
 private:
 	MissionManager();
-
-	//Layer* MemberLayer;
-	//std::list<Member*> MemberList;
+	std::list<Mission> MissionList;
 };

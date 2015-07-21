@@ -38,6 +38,7 @@ bool GuildMemberManager::init()
 	this->addMember(0);
 	this->addMember(0);
 	this->addMember(0);
+
 	return true;
 }
 
@@ -119,11 +120,11 @@ void GuildMemberManager::changeMode(GameMode mode)
 			(*iter)->changeMode(mode);
 			(*iter)->getCharacter()->setPositionY(MemberList.size() * 40
 			- (*iter)->getPositionY());
-			if (4 > MemberList.size())
+			if (8 > MemberList.size())
 			{
-				revision = 4 - MemberList.size();
+				revision = 8 - MemberList.size();
 			}
-			Point Location = { 25.0f, MemberList.size() * 40 + visibleSize.height / 2 - 12
+			Point Location = { 25.0f, MemberList.size() * 40  - 12.0f
 				- 40 * support_y + revision * 40};
 			/*auto moveAction = MoveTo::create(1.0f, ActionPoint);
 			auto scaleAction = ScaleTo::create(1.0f, 2.0f);

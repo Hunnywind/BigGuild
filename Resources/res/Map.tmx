@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="left-up" width="30" height="17" tilewidth="16" tileheight="16" nextobjectid="14">
+ <tileset firstgid="1" name="Game Boy Advance - Pokemon Fire Red Leaf Green - Tileset2" tilewidth="16" tileheight="16" spacing="1" margin="1">
+  <image source="Game Boy Advance - Pokemon Fire Red Leaf Green - Tileset2.png" width="477" height="800"/>
+ </tileset>
+ <layer name="BackGround" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjZ2BgYB/Fo3gUj+IRhrmBmAeIeelsrzoQawCx5gix1xmIXYDYdRDE+SiGYADCag9/
+  </data>
+ </layer>
+ <layer name="Struct" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyzZmRgsKEztgXicCAmFawG6lmDhNeSaEYkkr2kmHUcKHcCCZ+kwF5SzBooex+jhc1TCuyl1Cxy7aUFwJVmaG0vrrgbrvbiSjO0thcXGLV3ZNtriyZnTSU3guwtBuISHLgUzR58aknBIHMBiaZLig==
+  </data>
+ </layer>
+ <objectgroup name="Spawn">
+  <object id="2" name="SpawnPoint" x="112" y="112" width="160" height="112"/>
+ </objectgroup>
+ <objectgroup name="CollisionBox">
+  <object id="3" name="Box1" x="32" y="32" width="80" height="64"/>
+  <object id="4" name="Box2" x="208" y="16" width="80" height="64"/>
+  <object id="5" name="Box3" x="368" y="96" width="80" height="64"/>
+  <object id="6" name="Box4" x="0" y="0" width="480" height="16"/>
+  <object id="7" name="Box5" x="0" y="16" width="16" height="240"/>
+  <object id="8" name="Box6" x="0" y="256" width="112" height="16"/>
+  <object id="9" name="Box7" x="112" y="240" width="16" height="32"/>
+  <object id="10" name="Box8" x="176" y="240" width="16" height="32"/>
+  <object id="12" name="Box9" x="192" y="256" width="288" height="16"/>
+  <object id="13" name="Box10" x="464" y="16" width="16" height="240"/>
+ </objectgroup>
+</map>

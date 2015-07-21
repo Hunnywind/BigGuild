@@ -20,10 +20,11 @@ public:
 	void initLayer();
 	void initMenu();
 	void initButton();
-	void buttonCallback(Ref *pSender, ui::Widget::TouchEventType type);
+	void MissionButtonCallback(Ref *pSender, ui::Widget::TouchEventType type);
 	void gameCallback(Ref *sender);
 private:
-	std::list<ui::Button*> ButtonList;
+	std::list<ui::Button*> MissionButtonList;
+
 
 	int ButtonScrollSize;
 };

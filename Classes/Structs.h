@@ -31,3 +31,21 @@ struct BasicInfo
 		name("MISSINGNO"), type1(TypeList::TYPE_DEFAULT), type2(TypeList::TYPE_DEFAULT)
 	{ }
 };
+struct Mission
+{
+	int level;
+	int rewardExp;
+	int rewardRes;
+	TypeList rewardEggType;
+	
+	std::string name;
+	int time;
+	int requirementRes;
+
+	int Enemy[5];
+	int EnemySkillNumber[5];
+
+	Mission() : level(0), rewardExp(0), rewardRes(0), rewardEggType(TypeList::TYPE_DEFAULT),
+		name("Hard Mission"), time(0), requirementRes(0)
+	{ }
+};
