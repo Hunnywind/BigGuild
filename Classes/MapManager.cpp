@@ -16,10 +16,10 @@ MapManager* MapManager::getInstance()
 void MapManager::init()
 {
 	tilemap = NULL;
-	tilemap = TMXTiledMap::create("res/TestMap.tmx");
+	tilemap = TMXTiledMap::create("res/Map.tmx");
 	tilemap->retain();
 
-	auto group = tilemap->getObjectGroup("Object Group 1");
+	auto group = tilemap->getObjectGroup("CollisionBox");
 	auto& objects = group->getObjects();
 
 	Value objectsVal = Value(objects);
