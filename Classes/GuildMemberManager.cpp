@@ -28,16 +28,14 @@ GuildMemberManager* GuildMemberManager::getInstance()
 bool GuildMemberManager::init()
 {
 	SpriteFrameCache::getInstance()->
-		addSpriteFramesWithFile("res/pokemon.plist");
+		addSpriteFramesWithFile("res/Pokemon/151.plist");
 	SpriteFrameCache::getInstance()->
 		addSpriteFramesWithFile("res/type.plist");
 	this->initMemberLayer();
 
-	this->addMember(0);
-	this->addMember(0);
-	this->addMember(0);
-	this->addMember(0);
-	this->addMember(0);
+	this->addMember(3);
+	this->addMember(6);
+	this->addMember(9);
 
 	return true;
 }
@@ -51,9 +49,15 @@ void GuildMemberManager::initMemberLayer()
 void GuildMemberManager::addMember(int dex)
 {
 	// json
-	std::string filename = "Pokemon_37.gif";
+	char filename[20] = "Pokemon_";
+	char num[20];
+	char extension[20] = ".gif";
+	itoa(dex, num, 10);
+	strcat(num, extension);
+	strcat(filename,num);
+	std::string finalname = filename;
 	auto Unit = Member::create();
-	Unit->initSprite(filename);
+	Unit->initSprite(finalname);
 
 	MemberLayer->addChild(Unit);
 	MemberList.push_back(Unit);
@@ -118,20 +122,15 @@ void GuildMemberManager::changeMode(GameMode mode)
 		for (iter = MemberList.begin(); iter != MemberList.end(); iter++)
 		{
 			(*iter)->changeMode(mode);
-			(*iter)->getCharacter()->setPositionY(MemberList.size() * 40
-			- (*iter)->getPositionY());
 			if (8 > MemberList.size())
 			{
-				revision = 8 - MemberList.size();
+				revision = 7 - MemberList.size();
 			}
-			Point Location = { 25.0f, MemberList.size() * 40  - 12.0f
-				- 40 * support_y + revision * 40};
-			/*auto moveAction = MoveTo::create(1.0f, ActionPoint);
-			auto scaleAction = ScaleTo::create(1.0f, 2.0f);
-			auto spawnAction = Spawn::create(moveAction, scaleAction, NULL);
-			(*iter)->getCharacter()->runAction(spawnAction);*/
+			(*iter)->getCharacter()->setAnchorPoint(Point(0, 0));
+			Point Location = { -4.0f, MemberList.size() * 40 - 2
+				- 40 * support_y + revision * 40 - 40.0f};
 			(*iter)->getCharacter()->setPosition(Location);
-			(*iter)->getCharacter()->setScale(2.0f);
+			(*iter)->getCharacter()->setScale(1.5f);
 			support_y++;
 		}
 		

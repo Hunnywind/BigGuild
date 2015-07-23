@@ -17,5 +17,5 @@ public:
 private:
 	MapManager();
 	TMXTiledMap* tilemap;
-	Rect boxCollision[6];
+	Rect boxCollision[10];
 };

@@ -6,6 +6,7 @@
 #include "MainScene.h"
 #include "DetailScene.h"
 #include "MissionManager.h"
+#include "MenuManager.h"
 
 Scene* MissionScene::createScene()
 {
@@ -57,7 +58,8 @@ void MissionScene::initLayer()
 
 void MissionScene::initMenu()
 {
-	auto item_0 = MenuItemImage::create("res/MainMenuButton.png", "res/MainMenuButton.png",
+	this->getChildByName("LAYER_MENU")->addChild(MenuManager::getInstance()->getMenuLayer());
+	/*auto item_0 = MenuItemImage::create("res/MainMenuButton.png", "res/MainMenuButton.png",
 		CC_CALLBACK_1(MissionScene::gameCallback, this));
 	auto item_1 = MenuItemImage::create("res/MissionMenuButton.png", "res/MissionMenuButton.png",
 		CC_CALLBACK_1(MissionScene::gameCallback, this));
@@ -85,7 +87,7 @@ void MissionScene::initMenu()
 	menu->setPosition(Point(240, 300));
 
 	this->getChildByName("LAYER_MENU")->addChild(menu,1);
-	
+	*/
 }
 
 void MissionScene::initButton()
@@ -196,34 +198,6 @@ void MissionScene::initButton()
 	}
 }
 
-//void MissionScene::MemberButtonCallback(Ref *sender, ui::Widget::TouchEventType type)
-//{
-//	auto item = (ui::Button*)sender;
-//
-//	switch (type)
-//	{
-//	case ui::Widget::TouchEventType::BEGAN:
-//
-//		break;
-//
-//	case ui::Widget::TouchEventType::MOVED:
-//		break;
-//
-//	case ui::Widget::TouchEventType::ENDED:
-//		//this->getChildByName("SCROLLVIEW")
-//		//	->removeChild(GuildMemberManager::getInstance()->getMemberLayer(), false);
-//		//GuildMemberManager::getInstance()->changeMode(GameMode::DETAIL_MODE);
-//		//GuildMemberManager::getInstance()->detailMember(item->getTag());
-//		//Director::getInstance()->replaceScene(DetailScene::createScene());
-//		break;
-//
-//	case ui::Widget::TouchEventType::CANCELED:
-//		break;
-//
-//	default:
-//		break;
-//	}
-//}
 
 void MissionScene::MissionButtonCallback(Ref *sender, ui::Widget::TouchEventType type)
 {
@@ -240,11 +214,6 @@ void MissionScene::MissionButtonCallback(Ref *sender, ui::Widget::TouchEventType
 		break;
 
 	case ui::Widget::TouchEventType::ENDED:
-		//this->getChildByName("SCROLLVIEW")
-		//	->removeChild(GuildMemberManager::getInstance()->getMemberLayer(), false);
-		//GuildMemberManager::getInstance()->changeMode(GameMode::DETAIL_MODE);
-		//GuildMemberManager::getInstance()->detailMember(item->getTag());
-		//Director::getInstance()->replaceScene(DetailScene::createScene());
 		this->getChildByName("LAYER_REWARD")->getChildByName("REWARD")
 			->removeAllChildren();
 		this->getChildByName("LAYER_REWARD")->getChildByName("REWARD")
@@ -264,9 +233,6 @@ void MissionScene::MissionButtonCallback(Ref *sender, ui::Widget::TouchEventType
 void MissionScene::gameCallback(Ref *sender)
 {
 	auto item = (MenuItem*)sender;
-
-	/*this->getChildByName("SCROLLVIEW")
-		->removeChild(GuildMemberManager::getInstance()->getMemberLayer(), false);*/
 
 	if ("MAIN_FUNCTION" == item->getName())
 	{

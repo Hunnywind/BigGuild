@@ -21,4 +21,5 @@ public:
 private:
 	MissionManager();
 	std::list<Mission> MissionList;
+
 };

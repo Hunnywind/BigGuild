@@ -5,7 +5,7 @@
 #include "ui/CocosGUI.h"
 #include "MainScene.h"
 #include "DetailScene.h"
-
+#include "MenuManager.h"
 
 Scene* MemberScene::createScene()
 {
@@ -38,26 +38,30 @@ void MemberScene::initLayer()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
 	ui::ScrollView *scroll = ui::ScrollView::create();
+	//scroll->setAnchorPoint(Point(0, 0));
+	CCLOG("x:%f, y:%f", scroll->getAnchorPoint().x, scroll->getAnchorPoint().y);
 	scroll->setDirection(ui::ScrollView::Direction::VERTICAL);
-	scroll->setContentSize(Size(400, 320));
+	scroll->setContentSize(Size(400, 280));
 	scroll->setInnerContainerSize(Size(400, GuildMemberManager::getInstance()->getMemberSize()
 		* 40));
+	CCLOG("x:%f, y:%f", scroll->getPositionX(), scroll->getPositionY());
 	scroll->addChild(GuildMemberManager::getInstance()->getMemberLayer(),1);
 	this->addChild(scroll,0,"SCROLLVIEW");
 }
 
 void MemberScene::initMenu()
 {
-	auto item_0 = MenuItemFont::create("Main", CC_CALLBACK_1(MemberScene::gameCallback, this));
-	item_0->setName("MAIN_FUNCTION");
+	this->getChildByName("LAYER_MENU")->addChild(MenuManager::getInstance()->getMenuLayer());
+	//auto item_0 = MenuItemFont::create("Main", CC_CALLBACK_1(MemberScene::gameCallback, this));
+	//item_0->setName("MAIN_FUNCTION");
 
-	auto menu = Menu::create(item_0, NULL);
-	menu->alignItemsVerticallyWithPadding(20);
-	menu->setPosition(Point(440, 300));
+	//auto menu = Menu::create(item_0, NULL);
+	//menu->alignItemsVerticallyWithPadding(20);
+	//menu->setPosition(Point(440, 300));
 
-	
+	//
 
-	this->getChildByName("LAYER_MENU")->addChild(menu);
+	//this->getChildByName("LAYER_MENU")->addChild(menu);
 }
 
 void MemberScene::initButton()
@@ -75,14 +79,15 @@ void MemberScene::initButton()
 		this->getChildByName("SCROLLVIEW")->addChild(menuitem);
 		if (8 > MemberNum)
 		{
-			revision = 8 - MemberNum;
+			revision = 7 - MemberNum;
 		}
 		menuitem->setPositionY(MemberNum
-			* 40  - 40 * i - 40 + revision * 40);
+			* 40 - 40 * i + revision * 40 - 40);
+		CCLOG("y: %f", menuitem->getPositionY());
 		ButtonList.push_back(menuitem);
 
 		auto label = Label::createWithSystemFont("Lv", "Thonburi", 24);
-		CCLOG("x:%f, y:%f", label->getAnchorPoint().x, label->getAnchorPoint().y);
+		
 		label->setColor(Color3B(0, 0, 0));
 		label->setPosition(64.0f, 16.0f);
 		menuitem->addChild(label,1);
