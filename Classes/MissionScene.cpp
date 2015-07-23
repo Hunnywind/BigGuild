@@ -40,9 +40,8 @@ void MissionScene::initLayer()
 
 	ui::ScrollView *MissionScroll = ui::ScrollView::create();
 	MissionScroll->setDirection(ui::ScrollView::Direction::VERTICAL);
-	MissionScroll->setPosition(Point(0, 60));
 	MissionScroll->setAnchorPoint(Point(0, 0));
-	MissionScroll->setContentSize(Size(480, 220));
+	MissionScroll->setContentSize(Size(480, 280));
 	MissionScroll->setInnerContainerSize(Size(480, MissionManager::getInstance()->getMissionSize()
 		* 40));
 	this->addChild(MissionScroll, 0, "MISSION_SCROLLVIEW");
@@ -50,9 +49,6 @@ void MissionScene::initLayer()
 	auto RewardLayer = Layer::create();
 	this->addChild(RewardLayer, 0, "LAYER_REWARD");
 
-	auto rewardBar = Sprite::create("res/RewardBar.png");
-	rewardBar->setAnchorPoint(Point(0, 0));
-	RewardLayer->addChild(rewardBar,0,"REWARD");
 
 }
 
@@ -162,24 +158,9 @@ void MissionScene::initButton()
 		menuitem->setTag(MissionButtonList.size());
 		menuitem->setName("MISSION_FUNCTION");
 		this->getChildByName("MISSION_SCROLLVIEW")->addChild(menuitem);
-		if (4 > MissionNum)
-		{
-			revision = 4 - MissionNum;
-		}
-		if (5 > MissionNum)
-		{
-			revision2 = 20;
-		}
-		else if (5 == MissionNum)
-		{
-			revision2 = -20;
-		}
-		else
-		{
-			revision2 = -40;
-		}
+
 		menuitem->setPositionY(MissionNum
-			* 40 - 40 * i + revision * 40 + revision2);
+			* 40 - 40 * i - 40);
 		MissionButtonList.push_back(menuitem);
 
 		char LevelLabel[5] = "Lv ";
@@ -202,8 +183,6 @@ void MissionScene::initButton()
 void MissionScene::MissionButtonCallback(Ref *sender, ui::Widget::TouchEventType type)
 {
 	auto item = (ui::Button*)sender;
-	auto reward = Sprite::create("res/Pokemon1.png");
-
 	switch (type)
 	{
 	case ui::Widget::TouchEventType::BEGAN:
@@ -214,11 +193,6 @@ void MissionScene::MissionButtonCallback(Ref *sender, ui::Widget::TouchEventType
 		break;
 
 	case ui::Widget::TouchEventType::ENDED:
-		this->getChildByName("LAYER_REWARD")->getChildByName("REWARD")
-			->removeAllChildren();
-		this->getChildByName("LAYER_REWARD")->getChildByName("REWARD")
-			->addChild(reward, 1);
-		reward->setPosition(Point(77, 20));
 
 		break;
 
