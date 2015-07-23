@@ -36,7 +36,13 @@ bool GuildMemberManager::init()
 	this->addMember(3);
 	this->addMember(6);
 	this->addMember(9);
-
+	this->addMember(149);
+	this->addMember(45);
+	this->addMember(65);
+	this->addMember(42);
+	this->addMember(17);
+	this->addMember(38);
+	this->addMember(87);
 	return true;
 }
 

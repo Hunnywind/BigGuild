@@ -55,35 +55,6 @@ void MissionScene::initLayer()
 void MissionScene::initMenu()
 {
 	this->getChildByName("LAYER_MENU")->addChild(MenuManager::getInstance()->getMenuLayer());
-	/*auto item_0 = MenuItemImage::create("res/MainMenuButton.png", "res/MainMenuButton.png",
-		CC_CALLBACK_1(MissionScene::gameCallback, this));
-	auto item_1 = MenuItemImage::create("res/MissionMenuButton.png", "res/MissionMenuButton.png",
-		CC_CALLBACK_1(MissionScene::gameCallback, this));
-	auto item_2 = MenuItemImage::create("res/StructMenuButton.png", "res/StructMenuButton.png",
-		CC_CALLBACK_1(MissionScene::gameCallback, this));
-	auto item_3 = MenuItemImage::create("res/MemberMenuButton.png", "res/MemberMenuButton.png",
-		CC_CALLBACK_1(MissionScene::gameCallback, this));
-	auto item_4 = MenuItemImage::create("res/Resource.png", "res/Resource.png",
-		CC_CALLBACK_1(MissionScene::gameCallback, this));
-
-	item_0->setName("MAIN_FUNCTION");
-	item_2->setName("STRUCT_FUNCTION");
-	item_3->setName("MEMBER_FUNCTION");
-
-
-	
-
-	auto graybar = Sprite::create("res/GrayBar.png");
-	graybar->setAnchorPoint(Point(0, 0));
-	graybar->setPositionY(280.0f);
-	this->getChildByName("LAYER_MENU")->addChild(graybar, 0);
-
-	auto menu = Menu::create(item_0, item_1, item_2, item_3, item_4, NULL);
-	menu->alignItemsHorizontallyWithPadding(5);
-	menu->setPosition(Point(240, 300));
-
-	this->getChildByName("LAYER_MENU")->addChild(menu,1);
-	*/
 }
 
 void MissionScene::initButton()
