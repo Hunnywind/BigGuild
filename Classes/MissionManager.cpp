@@ -22,7 +22,13 @@ MissionManager* MissionManager::getInstance()
 bool MissionManager::init()
 {
 	this->addMission(0);
-
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
+	this->addMission(0);
 	return true;
 }
 

@@ -92,7 +92,6 @@ void MissionScene::initButton()
 	int MemberNum = 10;
 	int MissionNum = MissionManager::getInstance()->getMissionSize();
 	int revision = 0;
-	int revision2 = 0;
 	/*
 	for (int i = 0; i < MissionNum; i++)
 	{
@@ -159,8 +158,13 @@ void MissionScene::initButton()
 		menuitem->setName("MISSION_FUNCTION");
 		this->getChildByName("MISSION_SCROLLVIEW")->addChild(menuitem);
 
+		if (8 > MissionNum)
+		{
+			revision = 7 - MissionNum;
+		}
+
 		menuitem->setPositionY(MissionNum
-			* 40 - 40 * i - 40);
+			* 40 - 40 * i - 40 + revision * 40);
 		MissionButtonList.push_back(menuitem);
 
 		char LevelLabel[5] = "Lv ";
