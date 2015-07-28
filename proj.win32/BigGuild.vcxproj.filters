@@ -22,7 +22,7 @@
     <Filter Include="src\OtherCode">
       <UniqueIdentifier>{28c9eb22-028b-44bf-9f00-d3ff211b9cc9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Component">
+    <Filter Include="src\Mission">
       <UniqueIdentifier>{0f97abee-ecec-4a61-a2eb-b7436dfd63b3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -66,17 +66,17 @@
     <ClCompile Include="..\Classes\DetailScene.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MissionScene.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MissionManager.cpp">
-      <Filter>src\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MenuManager.cpp">
       <Filter>src\Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MissionDetailScene.cpp">
-      <Filter>src\Scene</Filter>
+      <Filter>src\Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MissionScene.cpp">
+      <Filter>src\Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MissionManager.cpp">
+      <Filter>src\Mission</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -125,17 +125,17 @@
     <ClInclude Include="..\Classes\DetailScene.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MissionScene.h">
-      <Filter>src\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MissionManager.h">
-      <Filter>src\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MenuManager.h">
       <Filter>src\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MissionDetailScene.h">
-      <Filter>src\Scene</Filter>
+      <Filter>src\Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MissionScene.h">
+      <Filter>src\Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MissionManager.h">
+      <Filter>src\Mission</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

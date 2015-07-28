@@ -1,10 +1,10 @@
 #include "DetailScene.h"
 #include "GuildMemberManager.h"
-#include "MapManager.h"
 #include "Structs.h"
 #include "ui/CocosGUI.h"
 #include "MainScene.h"
 #include "MemberScene.h"
+#include "MenuManager.h"
 
 Scene* DetailScene::createScene()
 {
@@ -27,6 +27,7 @@ bool DetailScene::init()
 	this->initMenu();
 	this->initDetail();
 	this->scheduleUpdate();
+	MenuManager::getInstance()->setPreGameMode(GameMode::DETAIL_MEMBER_MODE);
 	return true;
 }
 

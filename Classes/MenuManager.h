@@ -18,6 +18,7 @@ public:
 	static MenuManager* getInstance();
 	bool init();
 	Layer* getMenuLayer() { return Menuset; }
+	void setPreGameMode(GameMode mode) { preGameMode = mode; }
 	void buttonCallback(Ref *pSender, ui::Widget::TouchEventType type);
 	void sceneClean();
 private:

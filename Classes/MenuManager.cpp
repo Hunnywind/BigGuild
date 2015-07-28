@@ -122,16 +122,31 @@ void MenuManager::sceneClean()
 		GuildMemberManager::getInstance()->getMemberLayer()->removeFromParentAndCleanup(false);
 		MapManager::getInstance()->getTilemap()->removeFromParentAndCleanup(false);
 		Menuset->removeFromParentAndCleanup(false);
+		break;
 	}
 	case GameMode::MEMBER_MODE:
 	{
 		GuildMemberManager::getInstance()->getMemberLayer()->removeFromParentAndCleanup(false);
 		Menuset->removeFromParentAndCleanup(false);
+		break;
 	}
 	case GameMode::MISSION_MODE:
 	{
 		GuildMemberManager::getInstance()->getMemberLayer()->removeFromParentAndCleanup(false);
 		Menuset->removeFromParentAndCleanup(false);
+		break;
+	}
+	case GameMode::DETAIL_MEMBER_MODE:
+	{
+		GuildMemberManager::getInstance()->getMemberLayer()->removeFromParentAndCleanup(false);
+		Menuset->removeFromParentAndCleanup(false);
+		break;
+	}
+	case GameMode::DETAIL_MISSION_MODE:
+	{
+		GuildMemberManager::getInstance()->getMemberLayer()->removeFromParentAndCleanup(false);
+		Menuset->removeFromParentAndCleanup(false);
+		break;
 	}
 	}
 }

@@ -22,21 +22,21 @@ MissionManager* MissionManager::getInstance()
 bool MissionManager::init()
 {
 	this->scheduleUpdate();
-	this->addMission(0);
-	this->addMission(0);
-	this->addMission(0);
-	this->addMission(0);
-	this->addMission(0);
-	this->addMission(0);
-	this->addMission(0);
-	this->addMission(0);
+	this->addSTANBY(0);
+	this->addSTANBY(0);
+	this->addSTANBY(0);
+	this->addSTANBY(0);
+	this->addSTANBY(0);
+	this->addSTANBY(0);
+	this->addSTANBY(0);
+	this->addSTANBY(0);
 	return true;
 }
 
 void MissionManager::update(float delta)
 {
-	std::list<Mission>::iterator iter = MissionList.begin();
-	for (iter = MissionList.begin(); iter != MissionList.end(); iter++)
+	std::list<Mission>::iterator iter = STANBY_List.begin();
+	for (iter = STANBY_List.begin(); iter != STANBY_List.end(); iter++)
 	{
 		if (MissionCondition::PROGRESS == iter->preCondition)
 		{
@@ -49,7 +49,7 @@ void MissionManager::update(float delta)
 	}
 }
 
-void MissionManager::addMission(int dex)
+void MissionManager::addSTANBY(int dex)
 {
 	// json
 	Mission mission;
@@ -58,12 +58,12 @@ void MissionManager::addMission(int dex)
 		mission.Enemy[i] = i;
 		mission.EnemySkillNumber[i] = 2;
 	}
-	MissionList.push_back(mission);
+	STANBY_List.push_back(mission);
 }
 
-Mission MissionManager::getMission(int num)
+Mission MissionManager::getSTANBY(int num)
 {
-	std::list<Mission>::iterator iter = MissionList.begin();
+	std::list<Mission>::iterator iter = STANBY_List.begin();
 	for (int i = 0; i < num; i++)
 	{
 		iter++;
@@ -71,12 +71,25 @@ Mission MissionManager::getMission(int num)
 	return *iter;
 }
 
-Mission MissionManager::getDetailMission()
+Mission MissionManager::getPreSTANBY()
 {
-	std::list<Mission>::iterator iter = MissionList.begin();
+	std::list<Mission>::iterator iter = STANBY_List.begin();
 	for (int i = 0; i < DetailNum; i++)
 	{
 		iter++;
 	}
 	return *iter;
+}
+
+void MissionManager::moveToPROGRESS(int num)
+{
+	std::list<Mission>::iterator iter = STANBY_List.begin();
+	for (int i = 0; i < num; i++)
+	{
+		iter++;
+	}
+	PROGRESS_List.push_back(*iter);
+	
+	std::list<Mission>::iterator findIter = find(STANBY_List.begin(), STANBY_List.end(), *iter);
+	STANBY_List.erase(findIter);
 }

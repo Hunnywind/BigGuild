@@ -34,6 +34,8 @@ struct BasicInfo
 
 struct Mission
 {
+	int id;
+
 	MissionCondition preCondition;
 	int level;
 	int rewardExp;
@@ -48,8 +50,16 @@ struct Mission
 	int Enemy[5];
 	int EnemySkillNumber[5];
 
-	Mission() : preCondition(MissionCondition::STAN_BY),
+	Mission() : id(0) ,preCondition(MissionCondition::STAN_BY),
 		level(0), rewardExp(0), rewardRes(0), rewardEggType(TypeList::TYPE_DEFAULT),
 		name("Hard Mission"), time(0), resTime(0), requirementRes(0)
 	{ }
+
+	bool operator==(const Mission& _rhs)
+	{
+		if (this->id == _rhs.id)
+			return true;
+		else
+			return false;
+	}
 };

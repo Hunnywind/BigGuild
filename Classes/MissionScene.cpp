@@ -43,7 +43,7 @@ void MissionScene::initLayer()
 	MissionScroll->setDirection(ui::ScrollView::Direction::VERTICAL);
 	MissionScroll->setAnchorPoint(Point(0, 0));
 	MissionScroll->setContentSize(Size(480, 280));
-	MissionScroll->setInnerContainerSize(Size(480, MissionManager::getInstance()->getMissionSize()
+	MissionScroll->setInnerContainerSize(Size(480, MissionManager::getInstance()->getSTANBYSize()
 		* 40));
 	this->addChild(MissionScroll, 0, "MISSION_SCROLLVIEW");
 
@@ -60,7 +60,7 @@ void MissionScene::initButton()
 {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	int MemberNum = 10;
-	int MissionNum = MissionManager::getInstance()->getMissionSize();
+	int MissionNum = MissionManager::getInstance()->getSTANBYSize();
 	int revision = 0;
 	/*
 	for (int i = 0; i < MissionNum; i++)
@@ -119,7 +119,7 @@ void MissionScene::initButton()
 
 	for (int i = 0; i < MissionNum; i++)
 	{
-		Mission mission = MissionManager::getInstance()->getMission(i);
+		Mission mission = MissionManager::getInstance()->getSTANBY(i);
 
 		auto menuitem = ui::Button::create("res/MissionButton.png");
 		menuitem->addTouchEventListener(CC_CALLBACK_2(MissionScene::MissionButtonCallback, this));

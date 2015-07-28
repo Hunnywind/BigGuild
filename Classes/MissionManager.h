@@ -6,7 +6,7 @@
 #include "Structs.h"
 
 USING_NS_CC;
-class Member;
+
 
 
 class MissionManager : public Node
@@ -17,16 +17,21 @@ public:
 	bool init();
 	virtual void update(float delta);
 
-	void addMission(int dex);
+	void addSTANBY(int dex);
 
-	Mission getMission(int num);
-	Mission getDetailMission();
-	int getMissionSize() { return MissionList.size(); }
+	Mission getSTANBY(int num);
+	Mission getPreSTANBY();
+
+	void moveToPROGRESS(int num);
+
+	int getSTANBYSize() { return STANBY_List.size(); }
 
 	void setDetailNum(int num) { DetailNum = num; }
 private:
 	MissionManager();
-	std::list<Mission> MissionList;
+	std::list<Mission> STANBY_List;
+	std::list<Mission> PROGRESS_List;
+	std::list<Mission> COMPLETE_List;
 
 	int DetailNum;
 };
