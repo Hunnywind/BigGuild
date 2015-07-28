@@ -6,7 +6,8 @@ enum GameMode
 	MISSION_MODE = 2,
 	STRUCT_MODE = 3,
 	MEMBER_MODE = 4,
-	DETAIL_MODE = 5
+	DETAIL_MEMBER_MODE = 5,
+	DETAIL_MISSION_MODE = 6
 };
 enum ButtonFunction
 {

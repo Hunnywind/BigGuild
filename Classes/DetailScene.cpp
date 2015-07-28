@@ -156,7 +156,7 @@ void DetailScene::gameCallback(Ref *sender)
 	{
 		this->getChildByName("LAYER_MEMBER")->getChildByName("LAYER_DETAIL")
 			->removeAllChildrenWithCleanup(true);
-		GuildMemberManager::getInstance()->changeMode(GameMode::DETAIL_MODE);
+		GuildMemberManager::getInstance()->changeMode(GameMode::DETAIL_MEMBER_MODE);
 		GuildMemberManager::getInstance()->detailMember(present + 1);
 		this->initDetail();
 	}
@@ -164,7 +164,7 @@ void DetailScene::gameCallback(Ref *sender)
 	{
 		this->getChildByName("LAYER_MEMBER")->getChildByName("LAYER_DETAIL")
 			->removeAllChildrenWithCleanup(true);
-		GuildMemberManager::getInstance()->changeMode(GameMode::DETAIL_MODE);
+		GuildMemberManager::getInstance()->changeMode(GameMode::DETAIL_MEMBER_MODE);
 		GuildMemberManager::getInstance()->detailMember(present - 1);
 		this->initDetail();
 	}

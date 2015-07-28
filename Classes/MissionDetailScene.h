@@ -4,6 +4,8 @@
 #include "cocos2d.h"
 #include "Enum.h"
 #include <list>
+#include "ui/UIWidget.h"
+#include "ui/UIButton.h"
 USING_NS_CC;
 
 class MissionDetailScene : public Layer
@@ -19,8 +21,12 @@ public:
 	void initLayer();
 	void initMenu();
 	void initDetail();
+
 	void gameCallback(Ref *sender);
+	void MemberButtonCallback(Ref *sender, ui::Widget::TouchEventType type);
+	void OkCallback(Ref *sender, ui::Widget::TouchEventType type);
 private:
+	std::list<ui::Button*> MemberButtonList;
 };
 
 

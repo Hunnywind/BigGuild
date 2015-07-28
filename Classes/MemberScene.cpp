@@ -139,7 +139,7 @@ void MemberScene::buttonCallback(Ref *sender, ui::Widget::TouchEventType type)
 	case ui::Widget::TouchEventType::ENDED:
 		this->getChildByName("SCROLLVIEW")
 			->removeChild(GuildMemberManager::getInstance()->getMemberLayer(), false);
-		GuildMemberManager::getInstance()->changeMode(GameMode::DETAIL_MODE);
+		GuildMemberManager::getInstance()->changeMode(GameMode::DETAIL_MEMBER_MODE);
 		GuildMemberManager::getInstance()->detailMember(item->getTag());
 		Director::getInstance()->replaceScene(DetailScene::createScene());
 		break;

@@ -70,3 +70,13 @@ Mission MissionManager::getMission(int num)
 	}
 	return *iter;
 }
+
+Mission MissionManager::getDetailMission()
+{
+	std::list<Mission>::iterator iter = MissionList.begin();
+	for (int i = 0; i < DetailNum; i++)
+	{
+		iter++;
+	}
+	return *iter;
+}

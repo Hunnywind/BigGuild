@@ -7,6 +7,7 @@
 #include "DetailScene.h"
 #include "MissionManager.h"
 #include "MenuManager.h"
+#include "MissionDetailScene.h"
 
 Scene* MissionScene::createScene()
 {
@@ -46,8 +47,6 @@ void MissionScene::initLayer()
 		* 40));
 	this->addChild(MissionScroll, 0, "MISSION_SCROLLVIEW");
 
-	auto RewardLayer = Layer::create();
-	this->addChild(RewardLayer, 0, "LAYER_REWARD");
 
 
 }
@@ -168,7 +167,11 @@ void MissionScene::MissionButtonCallback(Ref *sender, ui::Widget::TouchEventType
 		break;
 
 	case ui::Widget::TouchEventType::ENDED:
-
+		this->removeChildByName("LAYER_MENU", false);
+		GuildMemberManager::getInstance()->changeMode(GameMode::DETAIL_MISSION_MODE);
+		//GuildMemberManager::getInstance()->detailMember(item->getTag());
+		MissionManager::getInstance()->setDetailNum(item->getTag());
+		Director::getInstance()->replaceScene(MissionDetailScene::createScene());
 		break;
 
 	case ui::Widget::TouchEventType::CANCELED:

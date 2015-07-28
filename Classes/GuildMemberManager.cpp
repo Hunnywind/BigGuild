@@ -142,13 +142,31 @@ void GuildMemberManager::changeMode(GameMode mode)
 		
 		break;
 	}
-	case GameMode::DETAIL_MODE:
+	case GameMode::DETAIL_MEMBER_MODE:
 	{
 		for (iter = MemberList.begin(); iter != MemberList.end(); iter++)
 		{
 			(*iter)->getCharacter()->setVisible(false);
 			(*iter)->stopAllActions();
 			//(*iter)->setPositionY((*iter)->getPositionY() - 600);
+		}
+		break;
+	}
+	case GameMode::DETAIL_MISSION_MODE:
+	{
+		for (iter = MemberList.begin(); iter != MemberList.end(); iter++)
+		{
+			(*iter)->changeMode(mode);
+			if (8 > MemberList.size())
+			{
+				revision = 7 - MemberList.size();
+			}
+			(*iter)->getCharacter()->setAnchorPoint(Point(0, 0));
+			Point Location = { -4.0f, MemberList.size() * 40 - 2
+				- 40 * support_y + revision * 40 - 40.0f };
+			(*iter)->getCharacter()->setPosition(Location);
+			(*iter)->getCharacter()->setScale(1.5f);
+			support_y++;
 		}
 		break;
 	}
@@ -173,6 +191,6 @@ void GuildMemberManager::detailMember(int num)
 		iter++;
 	}
 	(*iter)->getCharacter()->setVisible(true);
-	(*iter)->changeMode(GameMode::DETAIL_MODE);
+	(*iter)->changeMode(GameMode::DETAIL_MEMBER_MODE);
 	DetailNum = num;
 }

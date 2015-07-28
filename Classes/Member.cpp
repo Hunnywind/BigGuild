@@ -138,9 +138,13 @@ void Member::changeMode(GameMode mode)
 		Character->setVisible(true);
 		break;
 	}
-	case GameMode::DETAIL_MODE:
+	case GameMode::DETAIL_MEMBER_MODE:
 	{
 		Character->setPosition(Point(visibleSize.width / 13 , visibleSize.height / 1.1));
+		break;
+	}
+	case GameMode::DETAIL_MISSION_MODE:
+	{
 		break;
 	}
 	}

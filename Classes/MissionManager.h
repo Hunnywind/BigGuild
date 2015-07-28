@@ -18,10 +18,15 @@ public:
 	virtual void update(float delta);
 
 	void addMission(int dex);
+
 	Mission getMission(int num);
+	Mission getDetailMission();
 	int getMissionSize() { return MissionList.size(); }
+
+	void setDetailNum(int num) { DetailNum = num; }
 private:
 	MissionManager();
 	std::list<Mission> MissionList;
 
+	int DetailNum;
 };
