@@ -9,12 +9,14 @@ USING_NS_CC;
 class Member;
 
 
-class MissionManager
+class MissionManager : public Node
 {
 public:
 	~MissionManager(){}
 	static MissionManager* getInstance();
 	bool init();
+	virtual void update(float delta);
+
 	void addMission(int dex);
 	Mission getMission(int num);
 	int getMissionSize() { return MissionList.size(); }

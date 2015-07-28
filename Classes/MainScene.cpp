@@ -44,18 +44,7 @@ void MainScene::initLayer()
 void MainScene::initMenu()
 {
 	this->getChildByName("LAYER_MENU")->addChild(MenuManager::getInstance()->getMenuLayer());
-	//auto item_0 = MenuItemFont::create("Mission", CC_CALLBACK_1(MainScene::gameCallback, this));
-	//auto item_1 = MenuItemFont::create("Building", CC_CALLBACK_1(MainScene::gameCallback, this));
-	//auto item_2 = MenuItemFont::create("Member", CC_CALLBACK_1(MainScene::gameCallback, this));
-	//item_0->setName("MISSION_FUNCTION");
-	//item_1->setName("STRUCT_FUNCTION");
-	//item_2->setName("MEMBER_FUNCTION");
 
-	//auto menu = Menu::create(item_0, item_1, item_2, NULL);
-	//menu->alignItemsVerticallyWithPadding(20);
-	//menu->setPosition(Point(400, 240));
-
-	//this->getChildByName("LAYER_MENU")->addChild(menu);
 }
 
 void MainScene::gameCallback(Ref *sender)

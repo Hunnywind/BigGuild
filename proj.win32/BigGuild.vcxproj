@@ -150,6 +150,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClCompile Include="..\Classes\MenuManager.cpp" />
     <ClCompile Include="..\Classes\MenuScene.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
+    <ClCompile Include="..\Classes\MissionDetailScene.cpp" />
     <ClCompile Include="..\Classes\MissionManager.cpp" />
     <ClCompile Include="..\Classes\MissionScene.cpp" />
     <ClCompile Include="..\Classes\RScrollViewController.cpp" />
@@ -169,6 +170,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y</Command>
     <ClInclude Include="..\Classes\MenuManager.h" />
     <ClInclude Include="..\Classes\MenuScene.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
+    <ClInclude Include="..\Classes\MissionDetailScene.h" />
     <ClInclude Include="..\Classes\MissionManager.h" />
     <ClInclude Include="..\Classes\MissionScene.h" />
     <ClInclude Include="..\Classes\RScrollViewController.h" />

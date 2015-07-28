@@ -21,6 +21,7 @@ MissionManager* MissionManager::getInstance()
 }
 bool MissionManager::init()
 {
+	this->scheduleUpdate();
 	this->addMission(0);
 	this->addMission(0);
 	this->addMission(0);
@@ -30,6 +31,22 @@ bool MissionManager::init()
 	this->addMission(0);
 	this->addMission(0);
 	return true;
+}
+
+void MissionManager::update(float delta)
+{
+	std::list<Mission>::iterator iter = MissionList.begin();
+	for (iter = MissionList.begin(); iter != MissionList.end(); iter++)
+	{
+		if (MissionCondition::PROGRESS == iter->preCondition)
+		{
+			iter->resTime -= delta;
+			if (0 >= iter->resTime)
+			{
+				iter->preCondition = MissionCondition::COMPLETION;
+			}
+		}
+	}
 }
 
 void MissionManager::addMission(int dex)

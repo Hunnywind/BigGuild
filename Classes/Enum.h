@@ -51,3 +51,9 @@ enum TypeList
 	TYPE_DARK = 17,
 	TYPE_FAIRY = 18
 };
+enum MissionCondition
+{
+	PROGRESS = 0,
+	STAN_BY = 1,
+	COMPLETION = 2
+};
