@@ -137,19 +137,42 @@ void MissionScene::initButton()
 			* 40 - 40 * i - 40 + revision * 40);
 		MissionButtonList.push_back(menuitem);
 
-		char LevelLabel[5] = "Lv ";
-		char Level[5] = { 0 };
-		itoa(mission.level, Level, 10);
-		strcat(LevelLabel, Level);
-		auto label = Label::createWithSystemFont(LevelLabel, "Thonburi", 24);
-		label->setColor(Color3B(0, 0, 0));
-		label->setPosition(40,20);
-		menuitem->addChild(label);
-
 		auto missionName = Label::createWithSystemFont(mission.name, "Thonburi", 24);
 		missionName->setColor(Color3B(0, 0, 0));
-		missionName->setPosition(150, 20);
+		missionName->setPosition(110, 20);
 		menuitem->addChild(missionName);
+
+		// time setting
+		int hour = 0;
+		int minute = 0;
+		int sec = mission.time;
+		while (3600 <= sec)
+		{
+			hour++;
+			sec -= 3600;
+		}
+		while (60 <= sec)
+		{
+			minute++;
+			sec -= 60;
+		}
+
+		char l_hour[5] = { 0 };
+		itoa(hour, l_hour, 10);
+		char l_minute[5] = { 0 };
+		itoa(minute, l_minute, 10);
+
+		auto label_hour = Label::createWithSystemFont(l_hour, "Thonburi", 24);
+		label_hour->setColor(Color3B(0, 0, 0));
+		label_hour->setPosition(400, 20);
+		
+
+		auto label_minute = Label::createWithSystemFont(l_minute, "Thonburi", 24);
+		label_minute->setColor(Color3B(0, 0, 0));
+		label_minute->setPosition(440, 20);
+		
+		menuitem->addChild(label_hour);
+		menuitem->addChild(label_minute);
 	}
 }
 
@@ -169,7 +192,6 @@ void MissionScene::MissionButtonCallback(Ref *sender, ui::Widget::TouchEventType
 	case ui::Widget::TouchEventType::ENDED:
 		this->removeChildByName("LAYER_MENU", false);
 		GuildMemberManager::getInstance()->changeMode(GameMode::DETAIL_MISSION_MODE);
-		//GuildMemberManager::getInstance()->detailMember(item->getTag());
 		MissionManager::getInstance()->setDetailNum(item->getTag());
 		Director::getInstance()->replaceScene(MissionDetailScene::createScene());
 		break;

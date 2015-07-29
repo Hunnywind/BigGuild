@@ -58,6 +58,10 @@ void MissionManager::addSTANBY(int dex)
 		mission.Enemy[i] = i;
 		mission.EnemySkillNumber[i] = 2;
 	}
+	mission.time = 3600 * RandomHelper::random_int(0, 5)
+		+ 60 * RandomHelper::random_int(0, 30);
+	mission.resTime = mission.time;
+
 	STANBY_List.push_back(mission);
 }
 
