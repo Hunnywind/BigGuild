@@ -43,6 +43,7 @@ void MissionScene::initLayer()
 	MissionScroll->setDirection(ui::ScrollView::Direction::VERTICAL);
 	MissionScroll->setAnchorPoint(Point(0, 0));
 	MissionScroll->setContentSize(Size(480, 280));
+	MissionScroll->setBounceEnabled(true);
 	MissionScroll->setInnerContainerSize(Size(480, MissionManager::getInstance()->getSTANBYSize()
 		* 40));
 	this->addChild(MissionScroll, 0, "MISSION_SCROLLVIEW");
@@ -117,6 +118,12 @@ void MissionScene::initButton()
 	*/
 
 
+	int hour10 = 0;
+	int hour = 0;
+	int minute10 = 0;
+	int minute = 0;
+	int sec = 0;
+
 	for (int i = 0; i < MissionNum; i++)
 	{
 		Mission mission = MissionManager::getInstance()->getSTANBY(i);
@@ -137,19 +144,38 @@ void MissionScene::initButton()
 			* 40 - 40 * i - 40 + revision * 40);
 		MissionButtonList.push_back(menuitem);
 
-		auto missionName = Label::createWithSystemFont(mission.name, "Thonburi", 24);
+		auto missionName = Label::createWithSystemFont(mission.name, "Thonburi", 24, Size::ZERO,
+			TextHAlignment::LEFT);
 		missionName->setColor(Color3B(0, 0, 0));
 		missionName->setPosition(110, 20);
 		menuitem->addChild(missionName);
+		
+		auto stimer = Sprite::create("res/ic_time.png");
+		stimer->setAnchorPoint(Point(0, 0));
+		menuitem->addChild(stimer);
+		stimer->setPosition(Point(350, 5));
 
 		// time setting
-		int hour = 0;
-		int minute = 0;
-		int sec = mission.time;
+		hour10 = 0;
+		hour = 0;
+		minute10 = 0;
+		minute = 0;
+		sec = mission.time;
+
+		while (36000 <= sec)
+		{
+			hour10++;
+			sec -= 36000;
+		}
 		while (3600 <= sec)
 		{
 			hour++;
 			sec -= 3600;
+		}
+		while (600 <= sec)
+		{
+			minute10++;
+			sec -= 600;
 		}
 		while (60 <= sec)
 		{
@@ -157,17 +183,30 @@ void MissionScene::initButton()
 			sec -= 60;
 		}
 
+		char l_hour10[5] = { 0 };
+		itoa(hour10, l_hour10, 10);
+
 		char l_hour[5] = { 0 };
 		itoa(hour, l_hour, 10);
+
+		char l_middle[10] = " : ";
+
+		char l_minute10[5] = { 0 };
+		itoa(minute10, l_minute10, 10);
+
 		char l_minute[5] = { 0 };
 		itoa(minute, l_minute, 10);
 
-		auto label_hour = Label::createWithSystemFont(l_hour, "Thonburi", 24);
+		strcat(l_hour10, l_minute);
+		strcat(l_minute10, l_minute);
+		strcat(l_middle, l_minute10);
+
+
+		auto label_hour = Label::createWithSystemFont(l_hour10, "Thonburi", 24);
 		label_hour->setColor(Color3B(0, 0, 0));
 		label_hour->setPosition(400, 20);
 		
-
-		auto label_minute = Label::createWithSystemFont(l_minute, "Thonburi", 24);
+		auto label_minute = Label::createWithSystemFont(l_middle, "Thonburi", 24);
 		label_minute->setColor(Color3B(0, 0, 0));
 		label_minute->setPosition(440, 20);
 		
