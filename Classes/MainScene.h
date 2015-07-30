@@ -13,9 +13,12 @@ public:
 	CREATE_FUNC(MainScene);
 
 	virtual bool init();
+	virtual void update(float delta);
+
 	void initLayer();
 	void initMenu();
-	
+	void initMission();
+
 	void gameCallback(Ref *sender);
 };
 

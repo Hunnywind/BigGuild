@@ -35,24 +35,26 @@ struct BasicInfo
 struct Mission
 {
 	int id;
-
 	MissionCondition preCondition;
-	int level;
+
 	int rewardExp;
 	int rewardRes;
 	TypeList rewardEggType;
 	
+	int requirementRes;
+	int memberMaxCount;
+	int gradeMax;
+	int gradeMin;
+
 	std::string name;
+
 	float time;
 	float resTime;
-	int requirementRes;
-
-	int Enemy[5];
-	int EnemySkillNumber[5];
 
 	Mission() : id(0) ,preCondition(MissionCondition::STAN_BY),
-		level(0), rewardExp(0), rewardRes(0), rewardEggType(TypeList::TYPE_DEFAULT),
-		name("Hard Mission"), time(0), resTime(0), requirementRes(0)
+		rewardExp(0), rewardRes(0), rewardEggType(TypeList::TYPE_DEFAULT),
+		requirementRes(0), memberMaxCount(0), gradeMax(0), gradeMin(0),
+		name("Hard Mission"), time(0), resTime(0)
 	{ }
 
 	bool operator==(const Mission& _rhs)

@@ -9,6 +9,7 @@
 MissionManager::MissionManager()
 {
 	this->init();
+	this->retain();
 }
 MissionManager* MissionManager::getInstance()
 {
@@ -21,6 +22,7 @@ MissionManager* MissionManager::getInstance()
 }
 bool MissionManager::init()
 {
+	pool.initialize(5000);
 	this->scheduleUpdate();
 	this->addSTANBY(0);
 	this->addSTANBY(0);
@@ -35,8 +37,11 @@ bool MissionManager::init()
 
 void MissionManager::update(float delta)
 {
-	std::list<Mission>::iterator iter = STANBY_List.begin();
-	for (iter = STANBY_List.begin(); iter != STANBY_List.end(); iter++)
+	if (PROGRESS_List.size() == 0)
+		return;
+
+	std::list<Mission>::iterator iter = PROGRESS_List.begin();
+	for (iter = PROGRESS_List.begin(); iter != PROGRESS_List.end(); iter++)
 	{
 		if (MissionCondition::PROGRESS == iter->preCondition)
 		{
@@ -44,8 +49,26 @@ void MissionManager::update(float delta)
 			if (0 >= iter->resTime)
 			{
 				iter->preCondition = MissionCondition::COMPLETION;
+				COMPLETE_List.push_back(*iter);
+
+				std::list<Mission>::iterator findIter = find(PROGRESS_List.begin(), PROGRESS_List.end(), *iter);
+				PROGRESS_List.erase(findIter);
+				break;
 			}
 		}
+	}
+}
+
+int MissionManager::getMissionSize(MissionCondition con)
+{
+	switch (con)
+	{
+	case MissionCondition::STAN_BY:
+		return STANBY_List.size();
+	case MissionCondition::PROGRESS:
+		return PROGRESS_List.size();
+	case MissionCondition::COMPLETION:
+		return COMPLETE_List.size();
 	}
 }
 
@@ -53,25 +76,35 @@ void MissionManager::addSTANBY(int dex)
 {
 	// json
 	Mission mission;
-	for (int i = 0; i < 5; i++)
-	{
-		mission.Enemy[i] = i;
-		mission.EnemySkillNumber[i] = 2;
-	}
-	mission.time = 3600 * RandomHelper::random_int(0, 5)
-		+ 60 * RandomHelper::random_int(0, 30);
-	mission.resTime = mission.time;
 
+	mission.time = //3600 * RandomHelper::random_int(0, 5)
+		+ 5 * RandomHelper::random_int(0, 1);
+	mission.resTime = mission.time;
+	mission.id = *(pool.newData());
 	STANBY_List.push_back(mission);
 }
 
-Mission MissionManager::getSTANBY(int num)
+Mission MissionManager::getMission(MissionCondition con,int num)
 {
-	std::list<Mission>::iterator iter = STANBY_List.begin();
+	std::list<Mission>::iterator iter;
+	STANBY_List.begin();
+	switch (con)
+	{
+	case MissionCondition::STAN_BY:
+		iter = STANBY_List.begin();
+		break;
+	case MissionCondition::PROGRESS:
+		iter = PROGRESS_List.begin();
+		break;
+	case MissionCondition::COMPLETION:
+		iter = COMPLETE_List.begin();
+		break;
+	}
 	for (int i = 0; i < num; i++)
 	{
 		iter++;
 	}
+	
 	return *iter;
 }
 
@@ -85,13 +118,14 @@ Mission MissionManager::getPreSTANBY()
 	return *iter;
 }
 
-void MissionManager::moveToPROGRESS(int num)
+void MissionManager::moveToPROGRESS()
 {
 	std::list<Mission>::iterator iter = STANBY_List.begin();
-	for (int i = 0; i < num; i++)
+	for (int i = 0; i < DetailNum; i++)
 	{
 		iter++;
 	}
+	iter->preCondition = MissionCondition::PROGRESS;
 	PROGRESS_List.push_back(*iter);
 	
 	std::list<Mission>::iterator findIter = find(STANBY_List.begin(), STANBY_List.end(), *iter);

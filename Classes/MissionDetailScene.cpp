@@ -144,7 +144,7 @@ void MissionDetailScene::OkCallback(Ref *sender, ui::Widget::TouchEventType type
 		break;
 
 	case ui::Widget::TouchEventType::ENDED:
-		MissionManager::getInstance()->moveToPROGRESS(num);
+		MissionManager::getInstance()->moveToPROGRESS();
 		MenuManager::getInstance()->setPreGameMode(GameMode::DETAIL_MISSION_MODE);
 		MenuManager::getInstance()->sceneClean();
 		MenuManager::getInstance()->setPreGameMode(GameMode::MISSION_MODE);

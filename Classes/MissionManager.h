@@ -4,9 +4,10 @@
 #include <list>
 #include "Enum.h"
 #include "Structs.h"
-
+#include "Pooling.h"
+#include "ID.h";
 USING_NS_CC;
-
+using namespace Homura;
 
 
 class MissionManager : public Node
@@ -19,12 +20,12 @@ public:
 
 	void addSTANBY(int dex);
 
-	Mission getSTANBY(int num);
+	Mission getMission(MissionCondition con, int num);
 	Mission getPreSTANBY();
 
-	void moveToPROGRESS(int num);
+	void moveToPROGRESS();
 
-	int getSTANBYSize() { return STANBY_List.size(); }
+	int getMissionSize(MissionCondition con);
 
 	void setDetailNum(int num) { DetailNum = num; }
 private:
@@ -34,4 +35,6 @@ private:
 	std::list<Mission> COMPLETE_List;
 
 	int DetailNum;
+
+	CPool<ID> pool;
 };

@@ -9,6 +9,7 @@
 #include "MainScene.h"
 #include "MissionScene.h"
 #include "MemberScene.h"
+#include "MissionManager.h"
 
 MenuManager::MenuManager()
 {
@@ -121,6 +122,7 @@ void MenuManager::sceneClean()
 	{
 		GuildMemberManager::getInstance()->getMemberLayer()->removeFromParentAndCleanup(false);
 		MapManager::getInstance()->getTilemap()->removeFromParentAndCleanup(false);
+		MissionManager::getInstance()->removeFromParentAndCleanup(false);
 		Menuset->removeFromParentAndCleanup(false);
 		break;
 	}

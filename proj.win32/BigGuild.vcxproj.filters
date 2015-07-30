@@ -78,6 +78,9 @@
     <ClCompile Include="..\Classes\MissionManager.cpp">
       <Filter>src\Mission</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\ID.cpp">
+      <Filter>src\OtherCode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -136,6 +139,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MissionManager.h">
       <Filter>src\Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ID.h">
+      <Filter>src\OtherCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Pooling.h">
+      <Filter>src\OtherCode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

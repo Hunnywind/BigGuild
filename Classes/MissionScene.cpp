@@ -44,11 +44,9 @@ void MissionScene::initLayer()
 	MissionScroll->setAnchorPoint(Point(0, 0));
 	MissionScroll->setContentSize(Size(480, 280));
 	MissionScroll->setBounceEnabled(true);
-	MissionScroll->setInnerContainerSize(Size(480, MissionManager::getInstance()->getSTANBYSize()
+	MissionScroll->setInnerContainerSize(Size(480, MissionManager::getInstance()->getMissionSize(MissionCondition::STAN_BY)
 		* 40));
 	this->addChild(MissionScroll, 0, "MISSION_SCROLLVIEW");
-
-
 
 }
 
@@ -61,7 +59,7 @@ void MissionScene::initButton()
 {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	int MemberNum = 10;
-	int MissionNum = MissionManager::getInstance()->getSTANBYSize();
+	int MissionNum = MissionManager::getInstance()->getMissionSize(MissionCondition::STAN_BY);
 	int revision = 0;
 	/*
 	for (int i = 0; i < MissionNum; i++)
@@ -126,7 +124,7 @@ void MissionScene::initButton()
 
 	for (int i = 0; i < MissionNum; i++)
 	{
-		Mission mission = MissionManager::getInstance()->getSTANBY(i);
+		Mission mission = MissionManager::getInstance()->getMission(MissionCondition::STAN_BY,i);
 
 		auto menuitem = ui::Button::create("res/MissionButton.png");
 		menuitem->addTouchEventListener(CC_CALLBACK_2(MissionScene::MissionButtonCallback, this));
@@ -197,7 +195,7 @@ void MissionScene::initButton()
 		char l_minute[5] = { 0 };
 		itoa(minute, l_minute, 10);
 
-		strcat(l_hour10, l_minute);
+		strcat(l_hour10, l_hour);
 		strcat(l_minute10, l_minute);
 		strcat(l_middle, l_minute10);
 
