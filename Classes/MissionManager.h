@@ -37,4 +37,7 @@ private:
 	int DetailNum;
 
 	CPool<ID> pool;
+
+	// is Sort Progress Mission
+	bool isSort;
 };

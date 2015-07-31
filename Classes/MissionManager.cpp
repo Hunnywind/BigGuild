@@ -6,7 +6,15 @@
 
 
 
+
+
 MissionManager::MissionManager()
+	: STANBY_List()
+	, PROGRESS_List()
+	, COMPLETE_List()
+	, DetailNum(0)
+	, pool()
+	, isSort(true)
 {
 	this->init();
 	this->retain();
@@ -77,8 +85,9 @@ void MissionManager::addSTANBY(int dex)
 	// json
 	Mission mission;
 
-	mission.time = //3600 * RandomHelper::random_int(0, 5)
-		+ 5 * RandomHelper::random_int(0, 1);
+	//mission.time = //3600 * RandomHelper::random_int(0, 5)
+	//	+ 5 * RandomHelper::random_int(0, 1);
+	mission.time = 60 * RandomHelper::random_int(1, 5);
 	mission.resTime = mission.time;
 	mission.id = *(pool.newData());
 	STANBY_List.push_back(mission);
@@ -94,6 +103,12 @@ Mission MissionManager::getMission(MissionCondition con,int num)
 		iter = STANBY_List.begin();
 		break;
 	case MissionCondition::PROGRESS:
+		if (!isSort)
+		{
+			auto compare = [](Mission a, Mission b)->bool { return a.resTime < b.resTime; };
+			PROGRESS_List.sort(compare);
+			isSort = true;
+		}
 		iter = PROGRESS_List.begin();
 		break;
 	case MissionCondition::COMPLETION:
@@ -130,4 +145,6 @@ void MissionManager::moveToPROGRESS()
 	
 	std::list<Mission>::iterator findIter = find(STANBY_List.begin(), STANBY_List.end(), *iter);
 	STANBY_List.erase(findIter);
+
+	isSort = false;
 }
