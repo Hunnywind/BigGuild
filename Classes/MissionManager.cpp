@@ -78,7 +78,7 @@ void MissionManager::addSTANBY(int dex)
 	Mission mission;
 
 	mission.time = //3600 * RandomHelper::random_int(0, 5)
-		+ 5 * RandomHelper::random_int(0, 1);
+		+ 60 * RandomHelper::random_int(0, 30);
 	mission.resTime = mission.time;
 	mission.id = *(pool.newData());
 	STANBY_List.push_back(mission);
