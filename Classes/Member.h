@@ -28,6 +28,8 @@ public:
 	Point getPosition() { return Position; }
 	BasicInfo getBasicInfo() { return Stat; }
 
+	void setDex(int dex) { Stat.dex = dex; }
+
 	void rememberPostion();
 private:
 	Sprite* Character;

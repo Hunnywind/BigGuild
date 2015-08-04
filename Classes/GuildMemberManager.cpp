@@ -65,6 +65,8 @@ void GuildMemberManager::addMember(int dex)
 	auto Unit = Member::create();
 	Unit->initSprite(finalname);
 
+	Unit->setDex(dex);
+
 	MemberLayer->addChild(Unit);
 	MemberList.push_back(Unit);
 	

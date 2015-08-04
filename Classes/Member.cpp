@@ -36,6 +36,13 @@ void Member::initSprite(std::string filename)
 		Position.x = RandomHelper::random_int(obj["x"].asInt(), obj["x"].asInt() + obj["width"].asInt());
 		Position.y = RandomHelper::random_int(obj["y"].asInt(), obj["y"].asInt() + obj["height"].asInt());
 
+		if (GameMode::DETAIL_MISSION_MODE == Mode)
+		{
+			Position.x = 0;
+			Position.y = 0;
+		}
+		
+	
 		Character->setAnchorPoint(Point(0.5f, 0.5f));
 		Character->setPosition(Position);
 		this->addChild(Character);

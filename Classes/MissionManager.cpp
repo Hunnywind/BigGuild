@@ -81,6 +81,8 @@ void MissionManager::addSTANBY(int dex)
 		+ 60 * RandomHelper::random_int(0, 30);
 	mission.resTime = mission.time;
 	mission.id = *(pool.newData());
+	mission.gradeMax = 5;
+	mission.gradeMin = 3;
 	STANBY_List.push_back(mission);
 }
 

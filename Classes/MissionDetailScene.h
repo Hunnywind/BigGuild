@@ -22,11 +22,20 @@ public:
 	void initMenu();
 	void initDetail();
 
+	void setGrades();
+
 	void gameCallback(Ref *sender);
 	void MemberButtonCallback(Ref *sender, ui::Widget::TouchEventType type);
 	void OkCallback(Ref *sender, ui::Widget::TouchEventType type);
+
+	void addMemberToMission(int num);
+	void subMemberToMission(int num);
+
+	void sortSTANBY();
 private:
 	std::list<ui::Button*> MemberButtonList;
+
+	int MemberGrades;
 };
 
 
