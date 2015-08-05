@@ -214,6 +214,7 @@ void MissionDetailScene::OkCallback(Ref *sender, ui::Widget::TouchEventType type
 		if (this->getChildByName("LAYER_MISSION")
 			->getChildByName("OK_BUTTON")->getOpacity() == 255)
 		{
+			this->participateInMission();
 			MissionManager::getInstance()->moveToPROGRESS();
 			MenuManager::getInstance()->setPreGameMode(GameMode::DETAIL_MISSION_MODE);
 			MenuManager::getInstance()->sceneClean();
@@ -248,10 +249,12 @@ void MissionDetailScene::addMemberToMission(int num)
 	std::string finalname = filename;
 	StanByMember->changeMode(GameMode::DETAIL_MISSION_MODE);
 	StanByMember->initSprite(finalname);
+
 	StanByMember->setTag(num);
-	
+	StanByMember->setID(GuildMemberManager::getInstance()->getID(num));
 	this->getChildByName("LAYER_MISSION")->getChildByName("LAYER_STANBY")
 		->addChild(StanByMember);
+
 
 	this->sortSTANBY();
 	this->setGrades();
@@ -270,7 +273,6 @@ void MissionDetailScene::subMemberToMission(int num)
 void MissionDetailScene::sortSTANBY()
 {
 	std::vector<Node*>::iterator iter =
-
 		this->getChildByName("LAYER_MISSION")->getChildByName("LAYER_STANBY")
 		->getChildren().begin();
 
@@ -285,4 +287,19 @@ void MissionDetailScene::sortSTANBY()
 		i++;
 	}
 
+}
+
+void MissionDetailScene::participateInMission()
+{
+
+	std::vector<Node*>::iterator iter =
+		this->getChildByName("LAYER_MISSION")->getChildByName("LAYER_STANBY")
+		->getChildren().begin();
+
+	for (iter; iter != this->getChildByName("LAYER_MISSION")->getChildByName("LAYER_STANBY")
+		->getChildren().end(); iter++)
+	{
+		MissionManager::getInstance()->addMemberToMission(dynamic_cast<Member*>(*iter)->getID());
+		GuildMemberManager::getInstance()->setMemberMission((*iter)->getTag());
+	}
 }

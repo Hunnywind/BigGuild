@@ -94,6 +94,14 @@ void Member::update(float delta)
 
 	this->collisionCheck();
 
+	if (MissionCondition::PROGRESS == MissionProperty)
+	{
+		Character->setOpacity(60);
+	}
+	else
+	{
+		Character->setOpacity(255);
+	}
 }
 
 void Member::collisionCheck()

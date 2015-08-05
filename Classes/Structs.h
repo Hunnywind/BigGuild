@@ -1,6 +1,6 @@
 #pragma once
 #include "Enum.h"
-
+#include <vector>
 
 struct Ability
 {
@@ -52,6 +52,8 @@ struct Mission
 
 	float time;
 	float resTime;
+
+	std::vector<int> MemberID;
 
 	Mission() : id(0) ,preCondition(MissionCondition::STAN_BY),
 		rewardExp(0), rewardRes(0), rewardEggType(TypeList::TYPE_DEFAULT),

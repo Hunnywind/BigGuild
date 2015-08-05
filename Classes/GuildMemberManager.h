@@ -4,6 +4,8 @@
 #include <list>
 #include "Enum.h"
 #include "Structs.h"
+#include "Pooling.h"
+#include "ID.h"
 
 USING_NS_CC;
 class Member;
@@ -25,8 +27,9 @@ public:
 	int getMemberSize() { return MemberList.size(); }
 	void detailMember(int num);
 	int getDetailNum() { return DetailNum; }
-
+	int getID(int num);
 	void rememberPosition();
+	void setMemberMission(int num);
 private:
 	GuildMemberManager();
 
@@ -34,4 +37,6 @@ private:
 	std::list<Member*> MemberList;
 
 	int DetailNum;
+
+	CPool<ID> pool;
 };

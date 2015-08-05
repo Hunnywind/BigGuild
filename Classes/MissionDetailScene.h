@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "Enum.h"
 #include <list>
+#include <vector>
 #include "ui/UIWidget.h"
 #include "ui/UIButton.h"
 USING_NS_CC;
@@ -27,6 +28,7 @@ public:
 	void gameCallback(Ref *sender);
 	void MemberButtonCallback(Ref *sender, ui::Widget::TouchEventType type);
 	void OkCallback(Ref *sender, ui::Widget::TouchEventType type);
+	void participateInMission();
 
 	void addMemberToMission(int num);
 	void subMemberToMission(int num);
@@ -34,7 +36,7 @@ public:
 	void sortSTANBY();
 private:
 	std::list<ui::Button*> MemberButtonList;
-
+	std::vector<int> MemberIDList;
 	int MemberGrades;
 };
 

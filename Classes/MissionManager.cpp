@@ -133,3 +133,13 @@ void MissionManager::moveToPROGRESS()
 	std::list<Mission>::iterator findIter = find(STANBY_List.begin(), STANBY_List.end(), *iter);
 	STANBY_List.erase(findIter);
 }
+
+void MissionManager::addMemberToMission(int id)
+{
+	std::list<Mission>::iterator iter = STANBY_List.begin();
+	for (int i = 0; i < DetailNum; i++)
+	{
+		iter++;
+	}
+	iter->MemberID.push_back(id);
+}

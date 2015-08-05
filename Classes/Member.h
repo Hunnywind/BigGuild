@@ -29,6 +29,10 @@ public:
 	BasicInfo getBasicInfo() { return Stat; }
 
 	void setDex(int dex) { Stat.dex = dex; }
+	void setID(int num) { id = num; }
+	int getID() { return id; }
+
+	void setMission(MissionCondition con) { MissionProperty = con; }
 
 	void rememberPostion();
 private:
@@ -37,9 +41,11 @@ private:
 	Rect BoxCollision;
 	Point Position;
 	Point RanPosition;
+	MissionCondition MissionProperty;
 
 	// A Member Properties
 	BasicInfo Stat;
 	Ability Abil;
+	int id;
 };
 
