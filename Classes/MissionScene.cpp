@@ -154,62 +154,24 @@ void MissionScene::initButton()
 		stimer->setPosition(Point(350, 5));
 
 		// time setting
-		hour10 = 0;
-		hour = 0;
-		minute10 = 0;
-		minute = 0;
-		sec = mission.time;
+		int sec = mission.time;
+		int hour;
+		int minute;
 
-		while (36000 <= sec)
-		{
-			hour10++;
-			sec -= 36000;
-		}
-		while (3600 <= sec)
-		{
-			hour++;
-			sec -= 3600;
-		}
-		while (600 <= sec)
-		{
-			minute10++;
-			sec -= 600;
-		}
-		while (60 <= sec)
-		{
-			minute++;
-			sec -= 60;
-		}
+		hour = (sec / 3600);
+		sec = (sec % 3600);
 
-		char l_hour10[5] = { 0 };
-		itoa(hour10, l_hour10, 10);
+		minute = (sec / 60);
+		sec = (sec % 60);
 
-		char l_hour[5] = { 0 };
-		itoa(hour, l_hour, 10);
+		char time[20];
+		sprintf(time, "%02d : %02d", hour, minute);
 
-		char l_middle[10] = " : ";
+		Label *label_time = Label::createWithSystemFont(time, "Thonburi", 24);
+		label_time->setColor(Color3B(0, 0, 0));
+		label_time->setPosition(420.0f, 20.0f);
 
-		char l_minute10[5] = { 0 };
-		itoa(minute10, l_minute10, 10);
-
-		char l_minute[5] = { 0 };
-		itoa(minute, l_minute, 10);
-
-		strcat(l_hour10, l_hour);
-		strcat(l_minute10, l_minute);
-		strcat(l_middle, l_minute10);
-
-
-		auto label_hour = Label::createWithSystemFont(l_hour10, "Thonburi", 24);
-		label_hour->setColor(Color3B(0, 0, 0));
-		label_hour->setPosition(400, 20);
-		
-		auto label_minute = Label::createWithSystemFont(l_middle, "Thonburi", 24);
-		label_minute->setColor(Color3B(0, 0, 0));
-		label_minute->setPosition(440, 20);
-		
-		menuitem->addChild(label_hour);
-		menuitem->addChild(label_minute);
+		menuitem->addChild(label_time);
 	}
 }
 

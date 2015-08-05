@@ -60,64 +60,36 @@ void MainScene::initMission()
 	if (0 == maxSize)
 		return;
 
-	Layer *missionLayer = (Layer*)this->getChildByName("LAYER_MISSION");
-
 	Mission firstMission = MissionManager::getInstance()->getMission(MissionCondition::PROGRESS, 0);
 	auto sButton = Sprite::create("res/MissionButton.png");
 	sButton->setAnchorPoint(Point(0, 0));
-	missionLayer->addChild(sButton);
+	this->getChildByName("LAYER_MISSION")->addChild(sButton);
 
 	auto missionName = Label::createWithSystemFont(firstMission.name, "Thonburi", 24, Size::ZERO,
 		TextHAlignment::LEFT);
 	missionName->setColor(Color3B(0, 0, 0));
 	missionName->setPosition(10, 10);
 	missionName->setAnchorPoint(Point(0, 0));
-	missionLayer->addChild(missionName, 1);
+	this->getChildByName("LAYER_MISSION")->addChild(missionName,1);
 
 	int missionRestime = firstMission.resTime;
-	int missionResHour10 = 0;
-	int missionResHour = 0;
-	int missionResMinute10 = 0;
-	int missionResMinute = 0;
+	int missionResHour;
+	int missionResMinute;
 
-	missionResHour10 = missionRestime / 36000;
-	missionResHour = (missionRestime - missionResHour10 * 36000) / 3600;
-	missionResMinute10 = (missionRestime - missionResHour10 * 36000
-		- missionResHour * 3600) / 600;
-	missionResMinute = (missionRestime - missionResHour10 * 36000
-		- missionResHour * 3600 - missionResMinute10 * 600)
-		/ 60;
+	missionResHour = (missionRestime / 3600);
+	missionRestime = (missionRestime % 3600);
 
-	char l_hour10[5] = { 0 };
-	itoa(missionResHour10, l_hour10, 10);
+	missionResMinute = (missionRestime / 60);
+	missionRestime = (missionResMinute % 60);
 
-	char l_hour[5] = { 0 };
-	itoa(missionResHour, l_hour, 10);
+	char time[20];
+	sprintf(time, "%02d : %02d", missionResHour, missionResMinute);
 
-	char l_middle[10] = " : ";
+	Label *label_time = Label::createWithSystemFont(time, "Thonburi", 24);
+	label_time->setColor(Color3B(0, 0, 0));
+	label_time->setPosition(220.0f, 20.0f);
 
-	char l_minute10[5] = { 0 };
-	itoa(missionResMinute10, l_minute10, 10);
-
-	char l_minute[5] = { 0 };
-	itoa(missionResMinute, l_minute, 10);
-
-	strcat(l_hour10, l_hour);
-	strcat(l_minute10, l_minute);
-	strcat(l_middle, l_minute10);
-
-
-	auto label_hour = Label::createWithSystemFont(l_hour10, "Thonburi", 24);
-	label_hour->setColor(Color3B(0, 0, 0));
-	label_hour->setPosition(200, 20);
-
-	auto label_minute = Label::createWithSystemFont(l_middle, "Thonburi", 24);
-	label_minute->setColor(Color3B(0, 0, 0));
-	label_minute->setPosition(240, 20);
-
-
-	missionLayer->addChild(label_hour, 1, "TIME_HOUR");
-	missionLayer->addChild(label_minute, 1, "TIME_MINUTE");
+	this->getChildByName("LAYER_MISSION")->addChild(label_time, 1, "TIME");
 }
 
 void MainScene::update(float delta)
@@ -131,41 +103,20 @@ void MainScene::update(float delta)
 	Mission firstMission = MissionManager::getInstance()->getMission(MissionCondition::PROGRESS, 0);
 
 	int missionRestime = firstMission.resTime;
-	int missionResHour10 = 0;
-	int missionResHour = 0;
-	int missionResMinute10 = 0;
-	int missionResMinute = 0;
+	int missionResHour;
+	int missionResMinute;
 
-	missionResHour10 = missionRestime / 36000;
-	missionResHour = (missionRestime - missionResHour10 * 36000) / 3600;
-	missionResMinute10 = (missionRestime - missionResHour10 * 36000
-		- missionResHour * 3600) / 600;
-	missionResMinute = (missionRestime - missionResHour10 * 36000
-		- missionResHour * 3600 - missionResMinute10 * 600)
-		/ 60;
+	missionResHour = (missionRestime / 3600);
+	missionRestime = (missionRestime % 3600);
 
-	char l_hour10[5] = { 0 };
-	itoa(missionResHour10, l_hour10, 10);
+	missionResMinute = (missionRestime / 60);
+	missionRestime = (missionResMinute % 60);
 
-	char l_hour[5] = { 0 };
-	itoa(missionResHour, l_hour, 10);
+	char time[20];
+	sprintf(time, "%02d : %02d", missionResHour, missionResMinute);
 
-	char l_middle[10] = " : ";
-
-	char l_minute10[5] = { 0 };
-	itoa(missionResMinute10, l_minute10, 10);
-
-	char l_minute[5] = { 0 };
-	itoa(missionResMinute, l_minute, 10);
-
-	strcat(l_hour10, l_hour);
-	strcat(l_minute10, l_minute);
-	strcat(l_middle, l_minute10);
-
-	dynamic_cast<Label*>(this->getChildByName("LAYER_MISSION")->getChildByName("TIME_HOUR"))
-		->setString(l_hour10);
-	dynamic_cast<Label*>(this->getChildByName("LAYER_MISSION")->getChildByName("TIME_MINUTE"))
-		->setString(l_middle);
+	Label *label_time = (Label*)this->getChildByName("LAYER_MISSION")->getChildByName("TIME");
+	label_time->setString(time);
 }
 
 void MainScene::gameCallback(Ref *sender)
