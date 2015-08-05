@@ -1,6 +1,6 @@
 #pragma once
 #include "Enum.h"
-
+#include <vector>
 
 struct Ability
 {
@@ -19,15 +19,17 @@ struct Ability
 
 struct BasicInfo
 {
+	int dex;
 	int level;
 	int exp;
 	int expToLevelUp;
+	int grade;
 
 	std::string name;
 	TypeList type1;
 	TypeList type2;
 
-	BasicInfo() : level(0), exp(0), expToLevelUp(0),
+	BasicInfo() : dex(0),level(0), exp(0), expToLevelUp(0), grade(1),
 		name("MISSINGNO"), type1(TypeList::TYPE_DEFAULT), type2(TypeList::TYPE_DEFAULT)
 	{ }
 };
@@ -50,6 +52,8 @@ struct Mission
 
 	float time;
 	float resTime;
+
+	std::vector<int> MemberID;
 
 	Mission() : id(0) ,preCondition(MissionCondition::STAN_BY),
 		rewardExp(0), rewardRes(0), rewardEggType(TypeList::TYPE_DEFAULT),

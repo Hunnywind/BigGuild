@@ -27,6 +27,8 @@ GuildMemberManager* GuildMemberManager::getInstance()
 }
 bool GuildMemberManager::init()
 {
+	pool.initialize(5000);
+
 	SpriteFrameCache::getInstance()->
 		addSpriteFramesWithFile("res/Pokemon/151.plist");
 	SpriteFrameCache::getInstance()->
@@ -64,6 +66,8 @@ void GuildMemberManager::addMember(int dex)
 	std::string finalname = filename;
 	auto Unit = Member::create();
 	Unit->initSprite(finalname);
+	Unit->setID(*(pool.newData()));
+	Unit->setDex(dex);
 
 	MemberLayer->addChild(Unit);
 	MemberList.push_back(Unit);
@@ -85,6 +89,14 @@ Ability GuildMemberManager::getAbilityInfo(int num)
 		iter++;
 
 	return (*iter)->getAbil();
+}
+int GuildMemberManager::getID(int num)
+{
+	std::list<Member*>::iterator iter = MemberList.begin();
+	for (int i = 0; i < num; i++)
+		iter++;
+
+	return (*iter)->getID();
 }
 std::string GuildMemberManager::getTypeFilename(TypeList Type)
 {
@@ -193,4 +205,14 @@ void GuildMemberManager::detailMember(int num)
 	(*iter)->getCharacter()->setVisible(true);
 	(*iter)->changeMode(GameMode::DETAIL_MEMBER_MODE);
 	DetailNum = num;
+}
+
+void GuildMemberManager::setMemberMission(int num)
+{
+	std::list<Member*>::iterator iter = MemberList.begin();
+	for (int i = 0; i < num; i++)
+	{
+		iter++;
+	}
+	(*iter)->setMission(MissionCondition::PROGRESS);
 }

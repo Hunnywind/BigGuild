@@ -22,12 +22,13 @@ public:
 
 	Mission getMission(MissionCondition con, int num);
 	Mission getPreSTANBY();
-
+	
 	void moveToPROGRESS();
 
 	int getMissionSize(MissionCondition con);
 
 	void setDetailNum(int num) { DetailNum = num; }
+	void addMemberToMission(int id);
 private:
 	MissionManager();
 	std::list<Mission> STANBY_List;

@@ -85,11 +85,12 @@ void MissionManager::addSTANBY(int dex)
 	// json
 	Mission mission;
 
-	//mission.time = //3600 * RandomHelper::random_int(0, 5)
-	//	+ 5 * RandomHelper::random_int(0, 1);
-	mission.time = 60 * RandomHelper::random_int(1, 5);
+	mission.time = //3600 * RandomHelper::random_int(0, 5)
+		+ 60 * RandomHelper::random_int(0, 30);
 	mission.resTime = mission.time;
 	mission.id = *(pool.newData());
+	mission.gradeMax = 5;
+	mission.gradeMin = 3;
 	STANBY_List.push_back(mission);
 }
 
@@ -147,4 +148,14 @@ void MissionManager::moveToPROGRESS()
 	STANBY_List.erase(findIter);
 
 	isSort = false;
+}
+
+void MissionManager::addMemberToMission(int id)
+{
+	std::list<Mission>::iterator iter = STANBY_List.begin();
+	for (int i = 0; i < DetailNum; i++)
+	{
+		iter++;
+	}
+	iter->MemberID.push_back(id);
 }
