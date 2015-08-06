@@ -52,9 +52,9 @@ enum TypeList
 	TYPE_DARK = 17,
 	TYPE_FAIRY = 18
 };
-enum MissionCondition
+enum class MissionCondition : unsigned short
 {
-	PROGRESS = 0,
-	STAN_BY = 1,
-	COMPLETION = 2
+	PROGRESS = 0U,
+	STAN_BY,
+	COMPLETION,
 };

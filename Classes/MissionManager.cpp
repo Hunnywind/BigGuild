@@ -6,7 +6,15 @@
 
 
 
+
+
 MissionManager::MissionManager()
+	: STANBY_List()
+	, PROGRESS_List()
+	, COMPLETE_List()
+	, DetailNum(0)
+	, pool()
+	, isSort(true)
 {
 	this->init();
 	this->retain();
@@ -96,6 +104,12 @@ Mission MissionManager::getMission(MissionCondition con,int num)
 		iter = STANBY_List.begin();
 		break;
 	case MissionCondition::PROGRESS:
+		if (!isSort)
+		{
+			auto compare = [](Mission a, Mission b)->bool { return a.resTime < b.resTime; };
+			PROGRESS_List.sort(compare);
+			isSort = true;
+		}
 		iter = PROGRESS_List.begin();
 		break;
 	case MissionCondition::COMPLETION:
@@ -132,6 +146,8 @@ void MissionManager::moveToPROGRESS()
 	
 	std::list<Mission>::iterator findIter = find(STANBY_List.begin(), STANBY_List.end(), *iter);
 	STANBY_List.erase(findIter);
+
+	isSort = false;
 }
 
 void MissionManager::addMemberToMission(int id)
