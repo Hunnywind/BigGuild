@@ -1,4 +1,4 @@
-#include "MissionScene.h"
+#include "CompleteMissionScene.h"
 #include "GuildMemberManager.h"
 #include "MapManager.h"
 #include "Structs.h"
@@ -8,18 +8,19 @@
 #include "MissionManager.h"
 #include "MenuManager.h"
 #include "MissionDetailScene.h"
+#include "Member.h"
 
-Scene* MissionScene::createScene()
+Scene* CompleteMissionScene::createScene()
 {
 	auto scene = Scene::create();
 
-	auto layer = MissionScene::create();
+	auto layer = CompleteMissionScene::create();
 	scene->addChild(layer);
 
 	return scene;
 }
 
-bool MissionScene::init()
+bool CompleteMissionScene::init()
 {
 	if (!Layer::init())
 	{
@@ -32,7 +33,7 @@ bool MissionScene::init()
 	return true;
 }
 
-void MissionScene::initLayer()
+void CompleteMissionScene::initLayer()
 {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
@@ -50,30 +51,24 @@ void MissionScene::initLayer()
 
 }
 
-void MissionScene::initMenu()
+void CompleteMissionScene::initMenu()
 {
 	this->getChildByName("LAYER_MENU")->addChild(MenuManager::getInstance()->getMenuLayer());
 }
 
-void MissionScene::initButton()
+void CompleteMissionScene::initButton()
 {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	int MemberNum = 10;
-	int MissionNum = MissionManager::getInstance()->getMissionSize(MissionCondition::STAN_BY);
+	int MissionNum = MissionManager::getInstance()->getMissionSize(MissionCondition::COMPLETION);
 	int revision = 0;
-
-	int hour10 = 0;
-	int hour = 0;
-	int minute10 = 0;
-	int minute = 0;
-	int sec = 0;
 
 	for (int i = 0; i < MissionNum; i++)
 	{
-		Mission mission = MissionManager::getInstance()->getMission(MissionCondition::STAN_BY,i);
+		Mission mission = MissionManager::getInstance()->getMission(MissionCondition::COMPLETION,i);
 
 		auto menuitem = ui::Button::create("res/MissionButton.png");
-		menuitem->addTouchEventListener(CC_CALLBACK_2(MissionScene::MissionButtonCallback, this));
+		menuitem->addTouchEventListener(CC_CALLBACK_2(CompleteMissionScene::MissionButtonCallback, this));
 		menuitem->setAnchorPoint(Point(0, 0));
 		menuitem->setTag(MissionButtonList.size());
 		menuitem->setName("MISSION_FUNCTION");
@@ -94,35 +89,11 @@ void MissionScene::initButton()
 		missionName->setPosition(110, 20);
 		menuitem->addChild(missionName);
 		
-		auto stimer = Sprite::create("res/ic_time.png");
-		stimer->setAnchorPoint(Point(0, 0));
-		menuitem->addChild(stimer);
-		stimer->setPosition(Point(350, 5));
-
-		// time setting
-		int sec = mission.time;
-		int hour;
-		int minute;
-
-		hour = (sec / 3600);
-		sec = (sec % 3600);
-
-		minute = (sec / 60);
-		sec = (sec % 60);
-
-		char time[20];
-		sprintf(time, "%02d : %02d", hour, minute);
-
-		Label *label_time = Label::createWithSystemFont(time, "Thonburi", 24);
-		label_time->setColor(Color3B(0, 0, 0));
-		label_time->setPosition(420.0f, 20.0f);
-
-		menuitem->addChild(label_time);
 	}
 }
 
 
-void MissionScene::MissionButtonCallback(Ref *sender, ui::Widget::TouchEventType type)
+void CompleteMissionScene::MissionButtonCallback(Ref *sender, ui::Widget::TouchEventType type)
 {
 	auto item = (ui::Button*)sender;
 	switch (type)
@@ -135,10 +106,14 @@ void MissionScene::MissionButtonCallback(Ref *sender, ui::Widget::TouchEventType
 		break;
 
 	case ui::Widget::TouchEventType::ENDED:
+		this->MemberToSTANBY(item->getTag());
+		MissionManager::getInstance()->removeMission(MissionCondition::COMPLETION,item->getTag());
+		/*
 		this->removeChildByName("LAYER_MENU", false);
 		GuildMemberManager::getInstance()->changeMode(GameMode::DETAIL_MISSION_MODE);
 		MissionManager::getInstance()->setDetailNum(item->getTag());
 		Director::getInstance()->replaceScene(MissionDetailScene::createScene());
+		*/
 		break;
 
 	case ui::Widget::TouchEventType::CANCELED:
@@ -149,7 +124,7 @@ void MissionScene::MissionButtonCallback(Ref *sender, ui::Widget::TouchEventType
 	}
 }
 
-void MissionScene::gameCallback(Ref *sender)
+void CompleteMissionScene::gameCallback(Ref *sender)
 {
 	auto item = (MenuItem*)sender;
 
@@ -157,6 +132,34 @@ void MissionScene::gameCallback(Ref *sender)
 	{
 		GuildMemberManager::getInstance()->changeMode(GameMode::MAIN_MODE);
 		Director::getInstance()->replaceScene(MainScene::createScene());
+	}
+
+}
+
+void CompleteMissionScene::MemberToSTANBY(int num)
+{
+	Mission mission = MissionManager::getInstance()->getMission(MissionCondition::COMPLETION, num);
+	std::list<Member*>::iterator finditer;
+	auto FindMember = Member::create();
+	std::list<Member*> findlist = GuildMemberManager::getInstance()->getMemberList();
+
+	int size = mission.MemberID.size();
+	int id = 0;
+	
+
+	for (int i = 0; i < size; i++)
+	{
+		id = mission.MemberID.back();
+		mission.MemberID.pop_back();
+		FindMember->setID(id);
+
+		auto find_mission = [&FindMember](Member* member)
+		{
+			return FindMember->getID() == member->getID();
+		};
+		finditer = find_if(findlist.begin(), findlist.end(), find_mission);
+		
+		(*finditer)->setMission(MissionCondition::STAN_BY);
 	}
 
 }

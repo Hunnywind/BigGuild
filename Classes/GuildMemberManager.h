@@ -30,6 +30,8 @@ public:
 	int getID(int num);
 	void rememberPosition();
 	void setMemberMission(int num);
+	MissionCondition getMemberM_Condition(int num);
+	std::list<Member*> getMemberList() { return MemberList; }
 private:
 	GuildMemberManager();
 

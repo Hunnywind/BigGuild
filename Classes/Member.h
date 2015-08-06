@@ -31,10 +31,13 @@ public:
 	void setDex(int dex) { Stat.dex = dex; }
 	void setID(int num) { id = num; }
 	int getID() { return id; }
+	MissionCondition getM_Condition() { return MissionProperty; }
 
 	void setMission(MissionCondition con) { MissionProperty = con; }
 
 	void rememberPostion();
+
+
 private:
 	Sprite* Character;
 	GameMode Mode;

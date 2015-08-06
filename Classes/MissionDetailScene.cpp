@@ -169,6 +169,9 @@ void MissionDetailScene::MemberButtonCallback(Ref *sender, ui::Widget::TouchEven
 		break;
 
 	case ui::Widget::TouchEventType::ENDED:
+		if (MissionCondition::STAN_BY !=
+			GuildMemberManager::getInstance()->getMemberM_Condition(item->getTag()))
+			return;
 		if ("WAIT" == item->getName())
 		{
 			this->addMemberToMission(item->getTag());

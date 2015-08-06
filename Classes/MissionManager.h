@@ -29,6 +29,8 @@ public:
 
 	void setDetailNum(int num) { DetailNum = num; }
 	void addMemberToMission(int id);
+
+	void removeMission(MissionCondition con, int num);
 private:
 	MissionManager();
 	std::list<Mission> STANBY_List;

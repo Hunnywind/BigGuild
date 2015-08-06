@@ -60,17 +60,19 @@ void MainScene::initMission()
 	if (0 == maxSize)
 		return;
 
+	Layer *missionLayer = (Layer*)this->getChildByName("LAYER_MISSION");
+
 	Mission firstMission = MissionManager::getInstance()->getMission(MissionCondition::PROGRESS, 0);
 	auto sButton = Sprite::create("res/MissionButton.png");
 	sButton->setAnchorPoint(Point(0, 0));
-	this->getChildByName("LAYER_MISSION")->addChild(sButton);
+	missionLayer->addChild(sButton);
 
 	auto missionName = Label::createWithSystemFont(firstMission.name, "Thonburi", 24, Size::ZERO,
 		TextHAlignment::LEFT);
 	missionName->setColor(Color3B(0, 0, 0));
 	missionName->setPosition(10, 10);
 	missionName->setAnchorPoint(Point(0, 0));
-	this->getChildByName("LAYER_MISSION")->addChild(missionName,1);
+	missionLayer->addChild(missionName, 1);
 
 	int missionRestime = firstMission.resTime;
 	int missionResHour;
@@ -89,7 +91,7 @@ void MainScene::initMission()
 	label_time->setColor(Color3B(0, 0, 0));
 	label_time->setPosition(220.0f, 20.0f);
 
-	this->getChildByName("LAYER_MISSION")->addChild(label_time, 1, "TIME");
+	missionLayer->addChild(label_time, 1, "TIME");
 }
 
 void MainScene::update(float delta)

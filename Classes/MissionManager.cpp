@@ -86,7 +86,7 @@ void MissionManager::addSTANBY(int dex)
 	Mission mission;
 
 	mission.time = //3600 * RandomHelper::random_int(0, 5)
-		+ 60 * RandomHelper::random_int(0, 30);
+		+ 60 * RandomHelper::random_int(0, 1);
 	mission.resTime = mission.time;
 	mission.id = *(pool.newData());
 	mission.gradeMax = 5;
@@ -158,4 +158,24 @@ void MissionManager::addMemberToMission(int id)
 		iter++;
 	}
 	iter->MemberID.push_back(id);
+}
+
+void MissionManager::removeMission(MissionCondition con, int num)
+{
+	switch (con)
+	{
+	case MissionCondition::STAN_BY:
+		break;
+	case MissionCondition::PROGRESS:
+		break;
+	case MissionCondition::COMPLETION:
+		std::list<Mission>::iterator iter = COMPLETE_List.begin();
+		for (int i = 0; i < num; i++)
+		{
+			iter++;
+		}
+		std::list<Mission>::iterator findIter = find(COMPLETE_List.begin(), COMPLETE_List.end(), *iter);
+		COMPLETE_List.erase(findIter);
+		break;
+	}
 }

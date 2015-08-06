@@ -11,7 +11,13 @@ bool Compare(Member* elem1, Member* elem2)
 
 	return false;
 }
+bool CompareMission(Member* elem1, Member* elem2)
+{
+	if (elem1->getM_Condition() > elem2->getM_Condition())
+		return true;
 
+	return false;
+}
 GuildMemberManager::GuildMemberManager()
 {
 	this->init();
@@ -136,7 +142,7 @@ void GuildMemberManager::changeMode(GameMode mode)
 	}
 	case GameMode::MEMBER_MODE:
 	{
-		MemberList.sort(Compare);
+		MemberList.sort(CompareMission);
 		for (iter = MemberList.begin(); iter != MemberList.end(); iter++)
 		{
 			(*iter)->changeMode(mode);
@@ -162,6 +168,11 @@ void GuildMemberManager::changeMode(GameMode mode)
 			(*iter)->stopAllActions();
 			//(*iter)->setPositionY((*iter)->getPositionY() - 600);
 		}
+		break;
+	}
+	case GameMode::MISSION_MODE:
+	{
+		MemberList.sort(CompareMission);
 		break;
 	}
 	case GameMode::DETAIL_MISSION_MODE:
@@ -215,4 +226,14 @@ void GuildMemberManager::setMemberMission(int num)
 		iter++;
 	}
 	(*iter)->setMission(MissionCondition::PROGRESS);
+}
+
+MissionCondition GuildMemberManager::getMemberM_Condition(int num)
+{
+	std::list<Member*>::iterator iter = MemberList.begin();
+	for (int i = 0; i < num; i++)
+	{
+		iter++;
+	}
+	return (*iter)->getM_Condition();
 }

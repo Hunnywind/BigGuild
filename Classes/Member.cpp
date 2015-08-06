@@ -16,6 +16,7 @@ bool Member::init()
 	this->scheduleUpdate();
 	this->schedule(schedule_selector(Member::actionMake), 0.1f);
 	this->setGlobalZOrder(1);
+	MissionProperty = MissionCondition::STAN_BY;
 
 	// test
 	Stat.level = RandomHelper::random_int(1, 20);

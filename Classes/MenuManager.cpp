@@ -10,6 +10,7 @@
 #include "MissionScene.h"
 #include "MemberScene.h"
 #include "MissionManager.h"
+#include "CompleteMissionScene.h"
 
 MenuManager::MenuManager()
 {
@@ -101,8 +102,17 @@ void MenuManager::buttonCallback(Ref *pSender, ui::Widget::TouchEventType type)
 		{
 			this->sceneClean();
 			GuildMemberManager::getInstance()->changeMode(GameMode::MISSION_MODE);
-			Director::getInstance()->replaceScene(MissionScene::createScene());
 			preGameMode = GameMode::MISSION_MODE;
+			if (MissionManager::getInstance()->getMissionSize(MissionCondition::COMPLETION)
+				== 0)
+			{
+				Director::getInstance()->replaceScene(MissionScene::createScene());
+			}
+			else
+			{
+				Director::getInstance()->replaceScene(CompleteMissionScene::createScene());
+			}
+			
 		}
 		break;
 

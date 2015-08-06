@@ -81,6 +81,9 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\CompleteMissionScene.cpp">
+      <Filter>src\Mission</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -145,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Pooling.h">
       <Filter>src\OtherCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CompleteMissionScene.h">
+      <Filter>src\Mission</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
