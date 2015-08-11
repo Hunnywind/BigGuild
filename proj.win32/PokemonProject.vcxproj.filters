@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="win32">
+      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Mission">
+      <UniqueIdentifier>{666fc2fd-ac5f-4227-bf3c-fb6f6b3dcc2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OtherCodes">
+      <UniqueIdentifier>{4d5949b2-9515-461d-a78d-6ed40027750e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene">
+      <UniqueIdentifier>{0f9221eb-acf9-4a64-843b-5480422955f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Manager">
+      <UniqueIdentifier>{5e889bc6-c23c-458e-a1c8-b3ee4b84541f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Unit">
+      <UniqueIdentifier>{786af7f9-b74d-4a16-a80c-73945f27d560}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CompleteMissionScene.cpp">
+      <Filter>src\Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MissionDetailScene.cpp">
+      <Filter>src\Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MissionManager.cpp">
+      <Filter>src\Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MissionScene.cpp">
+      <Filter>src\Mission</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ID.cpp">
+      <Filter>src\OtherCodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RScrollViewController.cpp">
+      <Filter>src\OtherCodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RScrollViewItem.cpp">
+      <Filter>src\OtherCodes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DetailScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MenuScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GuildMemberManager.cpp">
+      <Filter>src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MapManager.cpp">
+      <Filter>src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MenuManager.cpp">
+      <Filter>src\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Member.cpp">
+      <Filter>src\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MemberScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelloWorldScene.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CompleteMissionScene.h">
+      <Filter>src\Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MissionDetailScene.h">
+      <Filter>src\Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MissionManager.h">
+      <Filter>src\Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MissionScene.h">
+      <Filter>src\Mission</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ID.h">
+      <Filter>src\OtherCodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Pooling.h">
+      <Filter>src\OtherCodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RScrollViewController.h">
+      <Filter>src\OtherCodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RScrollViewItem.h">
+      <Filter>src\OtherCodes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DetailScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MenuScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GuildMemberManager.h">
+      <Filter>src\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MapManager.h">
+      <Filter>src\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MenuManager.h">
+      <Filter>src\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Enum.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Structs.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Member.h">
+      <Filter>src\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MemberScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -38,7 +38,7 @@ bool GuildMemberManager::init()
 	SpriteFrameCache::getInstance()->
 		addSpriteFramesWithFile("res/Pokemon/151.plist");
 	SpriteFrameCache::getInstance()->
-		addSpriteFramesWithFile("res/type.plist");
+		addSpriteFramesWithFile("res/Type.plist");
 	this->initMemberLayer();
 
 	this->addMember(3);
@@ -66,7 +66,7 @@ void GuildMemberManager::addMember(int dex)
 	char filename[20] = "Pokemon_";
 	char num[20];
 	char extension[20] = ".gif";
-	itoa(dex, num, 10);
+	sprintf(num, "%d", dex);
 	strcat(num, extension);
 	strcat(filename,num);
 	std::string finalname = filename;
@@ -112,7 +112,8 @@ std::string GuildMemberManager::getTypeFilename(TypeList Type)
 	char filename[20] = "type";
 	char nation[20] = "E";
 	char num[20];
-	itoa(Type, num, 10);
+	int typenum = Type;
+	sprintf(num, "%d", typenum);
 	char extension[20] = ".png";
 
 	strcat(num, extension);

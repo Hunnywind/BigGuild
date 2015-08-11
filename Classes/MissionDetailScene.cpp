@@ -246,7 +246,7 @@ void MissionDetailScene::addMemberToMission(int num)
 	char filename[20] = "Pokemon_";
 	char _num[20];
 	char extension[20] = ".gif";
-	itoa(_dex, _num, 10);
+	sprintf(_num, "%d", _dex);
 	strcat(_num, extension);
 	strcat(filename, _num);
 	std::string finalname = filename;

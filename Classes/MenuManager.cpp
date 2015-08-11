@@ -44,7 +44,7 @@ bool MenuManager::init()
 	missionitem->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
 	missionitem->setAnchorPoint(Point(0, 0));
 
-	auto structitem = ui::Button::create("res/structMenuButton.png");
+	auto structitem = ui::Button::create("res/StructMenuButton.png");
 	structitem->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
 	structitem->setAnchorPoint(Point(0, 0));
 	structitem->setName("STRUCT_FUNCTION");

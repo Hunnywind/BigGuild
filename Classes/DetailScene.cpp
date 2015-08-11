@@ -79,7 +79,7 @@ void DetailScene::initDetail()
 
 	char LevelLabel[5] = "Lv";
 	char Level[5] = { 0 };
-	itoa(Stat.level, Level, 10);
+	sprintf(Level, "%d", Stat.level);
 	strcat(LevelLabel, Level);
 	auto label = Label::createWithSystemFont(LevelLabel, "Thonburi", 24);
 	label->setColor(Color3B(0, 0, 0));

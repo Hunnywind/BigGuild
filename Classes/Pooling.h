@@ -1,8 +1,6 @@
 ﻿#pragma once
 
 #include <vector>
-#include <Windows.h>
-
 
 namespace Homura
 {

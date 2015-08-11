@@ -52,16 +52,6 @@ void MemberScene::initLayer()
 void MemberScene::initMenu()
 {
 	this->getChildByName("LAYER_MENU")->addChild(MenuManager::getInstance()->getMenuLayer());
-	//auto item_0 = MenuItemFont::create("Main", CC_CALLBACK_1(MemberScene::gameCallback, this));
-	//item_0->setName("MAIN_FUNCTION");
-
-	//auto menu = Menu::create(item_0, NULL);
-	//menu->alignItemsVerticallyWithPadding(20);
-	//menu->setPosition(Point(440, 300));
-
-	//
-
-	//this->getChildByName("LAYER_MENU")->addChild(menu);
 }
 
 void MemberScene::initButton()
@@ -95,7 +85,7 @@ void MemberScene::initButton()
 		BasicInfo Info = GuildMemberManager::getInstance()->getBasicInfo(i);
 
 		char cLevel[5] = { 0 };
-		itoa(Info.level, cLevel, 10);
+		sprintf(cLevel, "%d", Info.level);
 		auto level = Label::create(cLevel, "Thonburi", 24);
 		level->setColor(Color3B(0, 0, 0));
 		level->setPosition(90.0f, 16.0f);
