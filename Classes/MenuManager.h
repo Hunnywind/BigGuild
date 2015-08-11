@@ -21,8 +21,12 @@ public:
 	void setPreGameMode(GameMode mode) { preGameMode = mode; }
 	void buttonCallback(Ref *pSender, ui::Widget::TouchEventType type);
 	void sceneClean();
+	void changeMode();
+
+	void clickcallback(Ref *pSender);
 private:
 	MenuManager();
 	Layer* Menuset;
 	GameMode preGameMode;
+	bool Mode;
 };

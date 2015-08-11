@@ -26,6 +26,7 @@ bool MainScene::init()
 	this->initLayer();
 	this->initMenu();
 	this->initMission();
+
 	return true;
 }
 
@@ -35,7 +36,7 @@ void MainScene::initLayer()
 	this->addChild(MenuLayer, 0, "LAYER_MENU");
 
 	auto MapLayer = Layer::create();
-	MapLayer->addChild(MapManager::getInstance()->getTilemap());
+	//MapLayer->addChild(MapManager::getInstance()->getTilemap());
 	this->addChild(MapLayer, 0, "LAYER_MAP");
 
 	auto MemberLayer = Layer::create();

@@ -34,9 +34,10 @@ void Member::initSprite(std::string filename)
 		auto spawnPoint = group->getObject("SpawnPoint");
 		Value objectsVal = Value(spawnPoint);
 		ValueMap obj = objectsVal.asValueMap();
-		Position.x = RandomHelper::random_int(obj["x"].asInt(), obj["x"].asInt() + obj["width"].asInt());
-		Position.y = RandomHelper::random_int(obj["y"].asInt(), obj["y"].asInt() + obj["height"].asInt());
-
+		//Position.x = RandomHelper::random_int(obj["x"].asInt(), obj["x"].asInt() + obj["width"].asInt());
+		//Position.y = RandomHelper::random_int(obj["y"].asInt(), obj["y"].asInt() + obj["height"].asInt());
+		Position.x = RandomHelper::random_int(10, 750);
+		Position.y = RandomHelper::random_int(180, 1270);
 		if (GameMode::DETAIL_MISSION_MODE == Mode)
 		{
 			Position.x = 0;
