@@ -23,6 +23,7 @@ public:
 	std::string getTypeFilename(TypeList Type);
 	bool init();
 	void addMember(int dex);
+	void cleanMode(GameMode mode);
 	void changeMode(GameMode mode);
 	int getMemberSize() { return MemberList.size(); }
 	void detailMember(int num);

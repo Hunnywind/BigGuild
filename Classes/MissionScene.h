@@ -12,7 +12,7 @@ USING_NS_CC;
 class MissionScene : public Layer
 {
 public:
-
+	MissionScene();
 	static Scene* createScene();
 	CREATE_FUNC(MissionScene);
 
@@ -22,11 +22,13 @@ public:
 	void initButton();
 	void MissionButtonCallback(Ref *pSender, ui::Widget::TouchEventType type);
 	void gameCallback(Ref *sender);
+
+	void changeTap();
 private:
 	std::list<ui::Button*> MissionButtonList;
 
-
 	int ButtonScrollSize;
+	bool isWAIT;
 };
 
 

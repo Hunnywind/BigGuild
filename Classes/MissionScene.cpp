@@ -9,6 +9,11 @@
 #include "MenuManager.h"
 #include "MissionDetailScene.h"
 
+MissionScene::MissionScene()
+	: isWAIT(true)
+{
+}
+
 Scene* MissionScene::createScene()
 {
 	auto scene = Scene::create();
@@ -27,6 +32,7 @@ bool MissionScene::init()
 	}
 	
 	this->initLayer();
+	this->changeTap();
 	this->initMenu();
 	this->initButton();
 	return true;
@@ -42,11 +48,18 @@ void MissionScene::initLayer()
 	ui::ScrollView *MissionScroll = ui::ScrollView::create();
 	MissionScroll->setDirection(ui::ScrollView::Direction::VERTICAL);
 	MissionScroll->setAnchorPoint(Point(0, 0));
-	MissionScroll->setContentSize(Size(480, 280));
-	MissionScroll->setBounceEnabled(true);
-	MissionScroll->setInnerContainerSize(Size(480, MissionManager::getInstance()->getMissionSize(MissionCondition::STAN_BY)
-		* 40));
-	this->addChild(MissionScroll, 0, "MISSION_SCROLLVIEW");
+	MissionScroll->setContentSize(Size(550, 830 + 48));
+	MissionScroll->setPosition(Point(Director::getInstance()->getWinSize().width * 0.5
+		- 550 * 0.5 + 48
+		, MenuManager::getInstance()->getMenuLayer()
+		->getChildByName("BAR")->getContentSize().height
+		+ MenuManager::getInstance()->getMenuLayer()
+		->getChildByName("BAR")->getPositionY()
+		+ 165 - 48
+		));
+	MissionScroll->setInnerContainerSize(Size(550, MissionManager::getInstance()->getMissionSize(MissionCondition::STAN_BY)
+		* 160 + 48));
+	this->addChild(MissionScroll, 1, "MISSION_SCROLLVIEW");
 
 }
 
@@ -72,7 +85,7 @@ void MissionScene::initButton()
 	{
 		Mission mission = MissionManager::getInstance()->getMission(MissionCondition::STAN_BY,i);
 
-		auto menuitem = ui::Button::create("res/MissionButton.png");
+		auto menuitem = ui::Button::create("UI/Mission/mission_base.png");
 		menuitem->addTouchEventListener(CC_CALLBACK_2(MissionScene::MissionButtonCallback, this));
 		menuitem->setAnchorPoint(Point(0, 0));
 		menuitem->setTag(MissionButtonList.size());
@@ -85,19 +98,33 @@ void MissionScene::initButton()
 		}
 
 		menuitem->setPositionY(MissionNum
-			* 40 - 40 * i - 40 + revision * 40);
+			* 160 - 160 * i - 160 + revision * 160 + 48);
 		MissionButtonList.push_back(menuitem);
 
-		auto missionName = Label::createWithSystemFont(mission.name, "Thonburi", 24, Size::ZERO,
-			TextHAlignment::LEFT);
-		missionName->setColor(Color3B(0, 0, 0));
-		missionName->setPosition(110, 20);
-		menuitem->addChild(missionName);
-		
+
+		auto reward = Sprite::create("UI/Mission/reward.png");
+		reward->setAnchorPoint(Point(0, 0));
+		reward->setPosition(menuitem->getSize().width - reward->getContentSize().width
+			- 20, 0);
+		menuitem->addChild(reward,1);
+
+
+		auto foes = //Sprite::create("UI/Mission/058.png");
+		Sprite::createWithSpriteFrameName("Pokemon_58.png");
+		foes->setAnchorPoint(Point(0, 0));
+		foes->setPosition(-20, 6);
+		foes->setScale(0.8);
+		menuitem->addChild(foes, 1);
+		//auto missionName = Label::createWithSystemFont(mission.name, "Thonburi", 24, Size::ZERO,
+		//	TextHAlignment::LEFT);
+		//missionName->setColor(Color3B(0, 0, 0));
+		//missionName->setPosition(110, 20);
+		//menuitem->addChild(missionName);
+		//
 		auto stimer = Sprite::create("res/ic_time.png");
 		stimer->setAnchorPoint(Point(0, 0));
 		menuitem->addChild(stimer);
-		stimer->setPosition(Point(350, 5));
+		stimer->setPosition(Point(250, 5));
 
 		// time setting
 		int sec = mission.time;
@@ -115,7 +142,7 @@ void MissionScene::initButton()
 
 		Label *label_time = Label::createWithSystemFont(time, "Thonburi", 24);
 		label_time->setColor(Color3B(0, 0, 0));
-		label_time->setPosition(420.0f, 20.0f);
+		label_time->setPosition(330.0f, 20.0f);
 
 		menuitem->addChild(label_time);
 	}
@@ -135,10 +162,10 @@ void MissionScene::MissionButtonCallback(Ref *sender, ui::Widget::TouchEventType
 		break;
 
 	case ui::Widget::TouchEventType::ENDED:
-		this->removeChildByName("LAYER_MENU", false);
-		GuildMemberManager::getInstance()->changeMode(GameMode::DETAIL_MISSION_MODE);
-		MissionManager::getInstance()->setDetailNum(item->getTag());
-		Director::getInstance()->replaceScene(MissionDetailScene::createScene());
+		//this->removeChildByName("LAYER_MENU", false);
+		//GuildMemberManager::getInstance()->changeMode(GameMode::DETAIL_MISSION_MODE);
+		//MissionManager::getInstance()->setDetailNum(item->getTag());
+		//Director::getInstance()->replaceScene(MissionDetailScene::createScene());
 		break;
 
 	case ui::Widget::TouchEventType::CANCELED:
@@ -159,4 +186,24 @@ void MissionScene::gameCallback(Ref *sender)
 		Director::getInstance()->replaceScene(MainScene::createScene());
 	}
 
+}
+
+void MissionScene::changeTap()
+{
+	if (isWAIT)
+	{
+		auto wait = Sprite::create("UI/Mission/base1.png");
+		wait->setAnchorPoint(Point(0, 0));
+		wait->setPositionX(Director::getInstance()->getWinSize().width * 0.5
+			- wait->getContentSize().width * 0.5);
+		wait->setPositionY(MenuManager::getInstance()->getMenuLayer()
+			->getChildByName("BAR")->getContentSize().height
+			+ MenuManager::getInstance()->getMenuLayer()
+			->getChildByName("BAR")->getPositionY());
+		this->addChild(wait);
+	}
+	else
+	{
+
+	}
 }

@@ -94,7 +94,7 @@ void Member::update(float delta)
 		RanPosition.y *= -1;
 	}
 
-	this->collisionCheck();
+	//this->collisionCheck();
 
 	if (MissionCondition::PROGRESS == MissionProperty)
 	{

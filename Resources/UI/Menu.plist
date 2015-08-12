@@ -95,7 +95,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>open2.png</key>
+            <key>open3.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{376,2},{621,100}}</string>
@@ -118,7 +118,7 @@
             <key>size</key>
             <string>{999,184}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:512497845050b5f4568f13c082d4d6eb:188aec5e17d31398e7b8c30d098ce7c2:474a9a58f742d06d2866a4a6eac25590$</string>
+            <string>$TexturePacker:SmartUpdate:3071860e4ca0fc9097307baa9bd5d471:11796c3ccb427a182783b173898e3ff6:474a9a58f742d06d2866a4a6eac25590$</string>
             <key>textureFileName</key>
             <string>Menu.png</string>
         </dict>

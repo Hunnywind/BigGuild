@@ -197,7 +197,7 @@
             <filename>../UI/Menu/5_system.png</filename>
             <filename>../UI/Menu/close.png</filename>
             <filename>../UI/Menu/open1.png</filename>
-            <filename>../UI/Menu/open2.png</filename>
+            <filename>../UI/Menu/open3.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

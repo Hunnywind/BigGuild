@@ -245,7 +245,7 @@ void MissionDetailScene::addMemberToMission(int num)
 	auto StanByMember = Member::create();
 	char filename[20] = "Pokemon_";
 	char _num[20];
-	char extension[20] = ".gif";
+	char extension[20] = ".png";
 	sprintf(_num, "%d", _dex);
 	strcat(_num, extension);
 	strcat(filename, _num);

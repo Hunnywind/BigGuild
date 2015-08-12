@@ -36,21 +36,23 @@ bool GuildMemberManager::init()
 	pool.initialize(5000);
 
 	SpriteFrameCache::getInstance()->
-		addSpriteFramesWithFile("res/Pokemon/151.plist");
+		addSpriteFramesWithFile("Pokemon/151_4x.plist");
 	SpriteFrameCache::getInstance()->
 		addSpriteFramesWithFile("res/Type.plist");
 	this->initMemberLayer();
 
-	this->addMember(3);
-	this->addMember(6);
-	this->addMember(9);
-	this->addMember(149);
-	this->addMember(45);
-	this->addMember(65);
-	this->addMember(42);
-	this->addMember(17);
-	this->addMember(38);
-	this->addMember(87);
+	this->addMember(RandomHelper::random_int(1,151));
+	this->addMember(RandomHelper::random_int(1, 151));
+	this->addMember(RandomHelper::random_int(1, 151));
+	this->addMember(RandomHelper::random_int(1, 151));
+	this->addMember(RandomHelper::random_int(1, 151));
+	this->addMember(RandomHelper::random_int(1, 151));
+	this->addMember(RandomHelper::random_int(1, 151));
+	this->addMember(RandomHelper::random_int(1, 151));
+	this->addMember(RandomHelper::random_int(1, 151));
+	this->addMember(RandomHelper::random_int(1, 151));
+	this->addMember(RandomHelper::random_int(1, 151));
+	this->addMember(RandomHelper::random_int(1, 151));
 	return true;
 }
 
@@ -65,7 +67,7 @@ void GuildMemberManager::addMember(int dex)
 	// json
 	char filename[20] = "Pokemon_";
 	char num[20];
-	char extension[20] = ".gif";
+	char extension[20] = ".png";
 	sprintf(num, "%d", dex);
 	strcat(num, extension);
 	strcat(filename,num);
@@ -123,7 +125,6 @@ std::string GuildMemberManager::getTypeFilename(TypeList Type)
 	std::string returnValue = filename;
 	return returnValue;
 }
-
 void GuildMemberManager::changeMode(GameMode mode)
 {
 	std::list<Member*>::iterator iter = MemberList.begin();
@@ -134,28 +135,28 @@ void GuildMemberManager::changeMode(GameMode mode)
 	{
 	case GameMode::MAIN_MODE:
 	{
-		for (iter = MemberList.begin(); iter != MemberList.end(); iter++)
+		for (auto i : MemberList)
 		{
-			(*iter)->stopAllActions();
-			(*iter)->changeMode(mode);
+			i->stopAllActions();
+			i->changeMode(mode);
 		}
 		break;
 	}
 	case GameMode::MEMBER_MODE:
 	{
 		MemberList.sort(CompareMission);
-		for (iter = MemberList.begin(); iter != MemberList.end(); iter++)
+		for (auto i : MemberList)
 		{
-			(*iter)->changeMode(mode);
+			i->changeMode(mode);
 			if (8 > MemberList.size())
 			{
 				revision = 7 - MemberList.size();
 			}
-			(*iter)->getCharacter()->setAnchorPoint(Point(0, 0));
+			i->getCharacter()->setAnchorPoint(Point(0, 0));
 			Point Location = { -4.0f, MemberList.size() * 40 - 2
 				- 40 * support_y + revision * 40 - 40.0f};
-			(*iter)->getCharacter()->setPosition(Location);
-			(*iter)->getCharacter()->setScale(1.5f);
+			i->getCharacter()->setPosition(Location);
+			i->getCharacter()->setScale(1.5f);
 			support_y++;
 		}
 		
@@ -163,11 +164,10 @@ void GuildMemberManager::changeMode(GameMode mode)
 	}
 	case GameMode::DETAIL_MEMBER_MODE:
 	{
-		for (iter = MemberList.begin(); iter != MemberList.end(); iter++)
+		for (auto i : MemberList)
 		{
-			(*iter)->getCharacter()->setVisible(false);
-			(*iter)->stopAllActions();
-			//(*iter)->setPositionY((*iter)->getPositionY() - 600);
+			i->getCharacter()->setVisible(false);
+			i->stopAllActions();
 		}
 		break;
 	}
@@ -178,18 +178,18 @@ void GuildMemberManager::changeMode(GameMode mode)
 	}
 	case GameMode::DETAIL_MISSION_MODE:
 	{
-		for (iter = MemberList.begin(); iter != MemberList.end(); iter++)
+		for (auto i : MemberList)
 		{
-			(*iter)->changeMode(mode);
+			i->changeMode(mode);
 			if (8 > MemberList.size())
 			{
 				revision = 7 - MemberList.size();
 			}
-			(*iter)->getCharacter()->setAnchorPoint(Point(0, 0));
+			i->getCharacter()->setAnchorPoint(Point(0, 0));
 			Point Location = { -4.0f, MemberList.size() * 40 - 2
 				- 40 * support_y + revision * 40 - 40.0f };
-			(*iter)->getCharacter()->setPosition(Location);
-			(*iter)->getCharacter()->setScale(1.5f);
+			i->getCharacter()->setPosition(Location);
+			i->getCharacter()->setScale(1.5f);
 			support_y++;
 		}
 		break;
@@ -199,12 +199,9 @@ void GuildMemberManager::changeMode(GameMode mode)
 
 void GuildMemberManager::rememberPosition()
 {
-	std::list<Member*>::iterator iter = MemberList.begin();
-
-	for (iter = MemberList.begin(); iter != MemberList.end(); iter++)
+	for (auto i : MemberList)
 	{
-		(*iter)->rememberPostion();
-		
+		i->rememberPostion();
 	}
 }
 void GuildMemberManager::detailMember(int num)

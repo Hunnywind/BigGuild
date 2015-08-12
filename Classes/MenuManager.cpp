@@ -97,10 +97,10 @@ void MenuManager::buttonCallback(Ref *pSender, ui::Widget::TouchEventType type)
 		if (GameMode::MEMBER_MODE != preGameMode
 			&& "MEMBER_FUNCTION" == item->getName())
 		{
-			this->sceneClean();
-			GuildMemberManager::getInstance()->changeMode(GameMode::MEMBER_MODE);
-			Director::getInstance()->replaceScene(MemberScene::createScene());
-			preGameMode = GameMode::MEMBER_MODE;
+			//this->sceneClean();
+			//GuildMemberManager::getInstance()->changeMode(GameMode::MEMBER_MODE);
+			//Director::getInstance()->replaceScene(MemberScene::createScene());
+			//preGameMode = GameMode::MEMBER_MODE;
 		}
 		if (GameMode::MISSION_MODE != preGameMode
 			&& "MISSION_FUNCTION" == item->getName())
@@ -142,6 +142,7 @@ void MenuManager::sceneClean()
 	{
 	case GameMode::MAIN_MODE:
 	{
+		GuildMemberManager::getInstance()->rememberPosition();
 		GuildMemberManager::getInstance()->getMemberLayer()->removeFromParentAndCleanup(false);
 		MapManager::getInstance()->getTilemap()->removeFromParentAndCleanup(false);
 		MissionManager::getInstance()->removeFromParentAndCleanup(false);
@@ -201,11 +202,11 @@ void MenuManager::changeMode()
 		Menuset->addChild(Switch,1);
 		Switch->setPositionX(Director::getInstance()->getWinSize().width - Switch->getSize().width);
 
-		auto buttonbar = Sprite::createWithSpriteFrameName("open2.png");
+		auto buttonbar = Sprite::createWithSpriteFrameName("open3.png");
 		buttonbar->setAnchorPoint(Point(0, 0));
-		Menuset->addChild(buttonbar,0);
+		Menuset->addChild(buttonbar,0,"BAR");
 		buttonbar->setPosition(Point(
-			0,
+			30,
 			Switch->getSize().height * 0.5 - buttonbar->getContentSize().height * 0.5));
 
 		auto button1 = cocos2d::ui::Button::create("1_mission.png", "", "",
@@ -213,7 +214,44 @@ void MenuManager::changeMode()
 		button1->setAnchorPoint(Point(0, 0));
 		button1->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
 		Menuset->addChild(button1, 1, "MISSION_FUNCTION");
-		button1->setPosition(Point(button1->getSize().width * 0.5,
-			buttonbar->getPositionY()));
+		button1->setPosition(Point(
+			buttonbar->getContentSize().width * 0.1 + 30,
+			buttonbar->getPositionY() + button1->getSize().height * 0.1 ));
+
+		auto button2 = cocos2d::ui::Button::create("2_town.png", "", "",
+			cocos2d::ui::Widget::TextureResType::PLIST);
+		button2->setAnchorPoint(Point(0, 0));
+		button2->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
+		Menuset->addChild(button2, 1, "MAIN_FUNCTION");
+		button2->setPosition(Point(
+			buttonbar->getContentSize().width * 0.25 + 30,
+			buttonbar->getPositionY() + button1->getSize().height * 0.06));
+
+		auto button3 = cocos2d::ui::Button::create("3_trainer.png", "", "",
+			cocos2d::ui::Widget::TextureResType::PLIST);
+		button3->setAnchorPoint(Point(0, 0));
+		button3->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
+		Menuset->addChild(button3, 1, "TRAINER_FUNCTION");
+		button3->setPosition(Point(
+			buttonbar->getContentSize().width * 0.4 + 30,
+			buttonbar->getPositionY() + button1->getSize().height * 0.08));
+
+		auto button4 = cocos2d::ui::Button::create("4_member.png", "", "",
+			cocos2d::ui::Widget::TextureResType::PLIST);
+		button4->setAnchorPoint(Point(0, 0));
+		button4->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
+		Menuset->addChild(button4, 1, "MEMBER_FUNCTION");
+		button4->setPosition(Point(
+			buttonbar->getContentSize().width * 0.56 + 30,
+			buttonbar->getPositionY() + button1->getSize().height * 0.05));
+
+		auto button5 = cocos2d::ui::Button::create("5_system.png", "", "",
+			cocos2d::ui::Widget::TextureResType::PLIST);
+		button5->setAnchorPoint(Point(0, 0));
+		button5->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
+		Menuset->addChild(button5, 1, "SYSTEM_FUNCTION");
+		button5->setPosition(Point(
+			buttonbar->getContentSize().width * 0.71 + 30,
+			buttonbar->getPositionY() + button1->getSize().height * 0.06));
 	}
 }
