@@ -182,24 +182,38 @@ void MenuManager::changeMode()
 
 	if (!Mode)
 	{
-		auto Switch = cocos2d::ui::Button::create("close.png", "close.png", "close.png",
+		auto Switch = cocos2d::ui::Button::create("close.png", "", "",
 			cocos2d::ui::Widget::TextureResType::PLIST);
 		Switch->setAnchorPoint(Point(0, 0));
 		Switch->setTouchEnabled(true);
 		Switch->setName("SWITCH");
 		Switch->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
 		Menuset->addChild(Switch);
-		//int a = Director::getInstance()->getWinSize().width;
 		Switch->setPositionX(Director::getInstance()->getWinSize().width - Switch->getSize().width);
 	}
 	else
 	{
-		auto Switch = ui::Button::create();
+		auto Switch = cocos2d::ui::Button::create("open1.png", "", "",
+			cocos2d::ui::Widget::TextureResType::PLIST);
 		Switch->setAnchorPoint(Point(0, 0));
 		Switch->setName("SWITCH");
 		Switch->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
-		Menuset->addChild(Switch);
-		Switch->init("open.png", "open.png", "open.png", cocos2d::ui::Widget::TextureResType::PLIST);
-		Switch->setPositionX(0);
+		Menuset->addChild(Switch,1);
+		Switch->setPositionX(Director::getInstance()->getWinSize().width - Switch->getSize().width);
+
+		auto buttonbar = Sprite::createWithSpriteFrameName("open2.png");
+		buttonbar->setAnchorPoint(Point(0, 0));
+		Menuset->addChild(buttonbar,0);
+		buttonbar->setPosition(Point(
+			0,
+			Switch->getSize().height * 0.5 - buttonbar->getContentSize().height * 0.5));
+
+		auto button1 = cocos2d::ui::Button::create("1_mission.png", "", "",
+			cocos2d::ui::Widget::TextureResType::PLIST);
+		button1->setAnchorPoint(Point(0, 0));
+		button1->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
+		Menuset->addChild(button1, 1, "MISSION_FUNCTION");
+		button1->setPosition(Point(button1->getSize().width * 0.5,
+			buttonbar->getPositionY()));
 	}
 }
