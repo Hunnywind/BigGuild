@@ -273,8 +273,12 @@ void MenuManager::changeMode()
 		buttonSystem->setEnabled(false);
 
 		// Action
-		auto actionEnd = [&]()
+		auto actionEnd = [this]()
 		{
+			auto switchClose = (cocos2d::ui::Button*)Menuset->getChildByName("SWITCH_CLOSE");
+			auto switchOpen = (cocos2d::ui::Button*)Menuset->getChildByName("SWITCH_OPEN");
+			auto buttonbar = (Sprite*)Menuset->getChildByName("BAR");
+
 			switchClose->setVisible(true);
 			switchClose->setEnabled(true);
 			switchOpen->setVisible(false);
@@ -311,8 +315,16 @@ void MenuManager::changeMode()
 		buttonbar->setVisible(true);
 
 		// Action
-		auto actionEnd = [&]()
+		auto actionEnd = [this]()
 		{
+			auto switchOpen = (cocos2d::ui::Button*)Menuset->getChildByName("SWITCH_OPEN");
+			auto buttonbar = (Sprite*)Menuset->getChildByName("BAR");
+			auto buttonMission = (cocos2d::ui::Button*)buttonbar->getChildByName("MISSION_FUNCTION");
+			auto buttonTown = (cocos2d::ui::Button*)buttonbar->getChildByName("MAIN_FUNCTION");
+			auto buttonTrainer = (cocos2d::ui::Button*)buttonbar->getChildByName("TRAINER_FUNCTION");
+			auto buttonMember = (cocos2d::ui::Button*)buttonbar->getChildByName("MEMBER_FUNCTION");
+			auto buttonSystem = (cocos2d::ui::Button*)buttonbar->getChildByName("SYSTEM_FUNCTION");
+
 			switchOpen->setEnabled(true);
 
 			buttonMission->setEnabled(true);
