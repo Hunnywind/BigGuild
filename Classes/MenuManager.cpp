@@ -36,8 +36,81 @@ bool MenuManager::init()
 	Menuset->retain();
 	Menuset->setAnchorPoint(Point(0, 0));
 
-	this->changeMode();
+	Size visibleSize = Director::getInstance()->getVisibleSize();
 
+	// Init Switch
+	auto switchClose = cocos2d::ui::Button::create("close.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
+	switchClose->setAnchorPoint(Point(0.5f, 0.5f));
+	switchClose->setName("SWITCH_CLOSE");
+	switchClose->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
+	Menuset->addChild(switchClose, 1);
+	switchClose->setPositionX(visibleSize.width - (switchClose->getSize().width / 2.0f));
+	switchClose->setPositionY(switchClose->getSize().height / 2.0f);
+
+	auto switchOpen = cocos2d::ui::Button::create("open1.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
+	switchOpen->setAnchorPoint(Point(0.5f, 0.5f));
+	switchOpen->setName("SWITCH_OPEN");
+	switchOpen->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
+	Menuset->addChild(switchOpen, 1);
+	switchOpen->setPositionX(visibleSize.width - (switchOpen->getSize().width / 2.0f));
+	switchOpen->setPositionY(switchOpen->getSize().height / 2.0f);
+	switchOpen->setVisible(false);
+	switchOpen->setEnabled(false);
+
+	// Init ButtonBar
+	auto buttonbar = Sprite::createWithSpriteFrameName("open3.png");
+	buttonbar->setAnchorPoint(Point(1.0f, 0.0f));
+	Menuset->addChild(buttonbar, 0, "BAR");
+	buttonbar->setPosition(switchOpen->getPositionX(), (switchOpen->getSize().height / 2.0f) - (buttonbar->getContentSize().height / 2.0f));
+	buttonbar->setScale(0.0f, 1.0f);
+
+	// Init Button
+	Size buttonBarSize = buttonbar->getContentSize();
+	Vec2 buttonBarPosition = buttonbar->getPosition();
+
+	auto buttonMission = cocos2d::ui::Button::create("1_mission.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
+	buttonMission->setAnchorPoint(Point(0, 0));
+	buttonMission->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
+	buttonbar->addChild(buttonMission, 1, "MISSION_FUNCTION");
+	buttonMission->setPosition(Vec2(buttonBarSize.width * 0.1f, buttonMission->getSize().height * 0.1f));
+
+	auto buttonTown = cocos2d::ui::Button::create("2_town.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
+	buttonTown->setAnchorPoint(Point(0, 0));
+	buttonTown->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
+	buttonbar->addChild(buttonTown, 1, "MAIN_FUNCTION");
+	buttonTown->setPosition(Vec2(buttonBarSize.width * 0.25f, buttonMission->getSize().height * 0.06f));
+
+	auto buttonTrainer = cocos2d::ui::Button::create("3_trainer.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
+	buttonTrainer->setAnchorPoint(Point(0, 0));
+	buttonTrainer->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
+	buttonbar->addChild(buttonTrainer, 1, "TRAINER_FUNCTION");
+	buttonTrainer->setPosition(Vec2(buttonBarSize.width * 0.4f, buttonMission->getSize().height * 0.08f));
+
+	auto buttonMember = cocos2d::ui::Button::create("4_member.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
+	buttonMember->setAnchorPoint(Point(0, 0));
+	buttonMember->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
+	buttonbar->addChild(buttonMember, 1, "MEMBER_FUNCTION");
+	buttonMember->setPosition(Vec2(buttonBarSize.width * 0.56f, buttonMission->getSize().height * 0.05f));
+
+	auto buttonSystem = cocos2d::ui::Button::create("5_system.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
+	buttonSystem->setAnchorPoint(Point(0, 0));
+	buttonSystem->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
+	buttonbar->addChild(buttonSystem, 1, "SYSTEM_FUNCTION");
+	buttonSystem->setPosition(Vec2(buttonBarSize.width * 0.71f, buttonMission->getSize().height * 0.06f));
+
+	buttonbar->setVisible(false);
+	buttonMission->setEnabled(false);
+	buttonTown->setEnabled(false);
+	buttonTrainer->setEnabled(false);
+	buttonMember->setEnabled(false);
+	buttonSystem->setEnabled(false);
+
+	//button1->setEnabled(false);
+	//button2->setEnabled(false);
+	//button3->setEnabled(false);
+	//button4->setEnabled(false);
+	//button5->setEnabled(false);
+	
 	//auto graybar = Sprite::create("res/graybar.png");
 	//graybar->setAnchorPoint(Point(0, 0));
 
@@ -119,10 +192,9 @@ void MenuManager::buttonCallback(Ref *pSender, ui::Widget::TouchEventType type)
 			}
 			
 		}
- 		if ("SWITCH" == item->getName())
+		if (item->getName() == "SWITCH_CLOSE" || item->getName() == "SWITCH_OPEN")
 		{
-			if (Mode) Mode = false;
-			else Mode = true;
+			Mode = !Mode;
 
 			this->changeMode();
 		}
@@ -178,83 +250,82 @@ void MenuManager::sceneClean()
 
 void MenuManager::changeMode()
 {
-	Menuset->removeAllChildrenWithCleanup(true);
-	
 	if (!Mode)
 	{
-		auto Switch = cocos2d::ui::Button::create("close.png", "", "",
-			cocos2d::ui::Widget::TextureResType::PLIST);
-		Switch->setAnchorPoint(Point(0, 0));
-		Switch->setTouchEnabled(true);
-		Switch->setName("SWITCH");
-		Switch->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
-		Menuset->addChild(Switch);
-		Switch->setPositionX(Director::getInstance()->getWinSize().width - Switch->getSize().width);
+		// Switch
+		auto switchClose = (cocos2d::ui::Button*)Menuset->getChildByName("SWITCH_CLOSE");
+		auto switchOpen = (cocos2d::ui::Button*)Menuset->getChildByName("SWITCH_OPEN");
+
+		switchOpen->setEnabled(false);
+
+		// Button
+		auto buttonbar = (Sprite*)Menuset->getChildByName("BAR");
+		auto buttonMission = (cocos2d::ui::Button*)buttonbar->getChildByName("MISSION_FUNCTION");
+		auto buttonTown = (cocos2d::ui::Button*)buttonbar->getChildByName("MAIN_FUNCTION");
+		auto buttonTrainer = (cocos2d::ui::Button*)buttonbar->getChildByName("TRAINER_FUNCTION");
+		auto buttonMember = (cocos2d::ui::Button*)buttonbar->getChildByName("MEMBER_FUNCTION");
+		auto buttonSystem = (cocos2d::ui::Button*)buttonbar->getChildByName("SYSTEM_FUNCTION");
+
+		buttonMission->setEnabled(false);
+		buttonTown->setEnabled(false);
+		buttonTrainer->setEnabled(false);
+		buttonMember->setEnabled(false);
+		buttonSystem->setEnabled(false);
+
+		// Action
+		auto actionEnd = [&]()
+		{
+			switchClose->setVisible(true);
+			switchClose->setEnabled(true);
+			switchOpen->setVisible(false);
+
+			buttonbar->setVisible(false);
+		};
+		CallFunc *actionCallFunc = CallFunc::create(actionEnd);
+		RotateTo *actionRotate = RotateTo::create(0.5f, 60.0f);
+		ScaleTo *actionScale = ScaleTo::create(0.5f, 0.0f, 1.0f);
+
+		switchOpen->runAction(Sequence::create(EaseBounceOut::create(actionRotate), actionCallFunc, nullptr));
+		buttonbar->runAction(EaseOut::create(actionScale, 10.0f));
 	}
 	else
 	{
-		Size visibleSize = Director::getInstance()->getVisibleSize();
+		// Switch
+		auto switchClose = (cocos2d::ui::Button*)Menuset->getChildByName("SWITCH_CLOSE");
+		auto switchOpen = (cocos2d::ui::Button*)Menuset->getChildByName("SWITCH_OPEN");
 
-		auto Switch = cocos2d::ui::Button::create("open1.png", "", "",
-			cocos2d::ui::Widget::TextureResType::PLIST);
-		Switch->setAnchorPoint(Point(0.5f, 0.5f));
-		Switch->setName("SWITCH");
-		Switch->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
-		Menuset->addChild(Switch, 1);
-		Switch->setPositionX(visibleSize.width - (Switch->getSize().width / 2.0f));
-		Switch->setPositionY(Switch->getSize().height / 2.0f);
-		Switch->setRotation(60.0f);
+		switchClose->setVisible(false);
+		switchClose->setEnabled(false);
+		switchOpen->setVisible(true);
 
-		auto buttonbar = Sprite::createWithSpriteFrameName("open3.png");
-		buttonbar->setAnchorPoint(Point(1.0f, 0.0f));
-		Menuset->addChild(buttonbar, 0, "BAR");
-		buttonbar->setPosition(Switch->getPositionX(), (Switch->getSize().height / 2.0f) - (buttonbar->getContentSize().height / 2.0f));
-		buttonbar->setScale(0.0f, 1.0f);
+		switchOpen->setRotation(60.0f);
 
 		// Button
-		Size buttonBarSize = buttonbar->getContentSize();
-		Vec2 buttonBarPosition = buttonbar->getPosition();
+		auto buttonbar = (Sprite*)Menuset->getChildByName("BAR");
+		auto buttonMission = (cocos2d::ui::Button*)buttonbar->getChildByName("MISSION_FUNCTION");
+		auto buttonTown = (cocos2d::ui::Button*)buttonbar->getChildByName("MAIN_FUNCTION");
+		auto buttonTrainer = (cocos2d::ui::Button*)buttonbar->getChildByName("TRAINER_FUNCTION");
+		auto buttonMember = (cocos2d::ui::Button*)buttonbar->getChildByName("MEMBER_FUNCTION");
+		auto buttonSystem = (cocos2d::ui::Button*)buttonbar->getChildByName("SYSTEM_FUNCTION");
 
-		auto button1 = cocos2d::ui::Button::create("1_mission.png", "", "",
-			cocos2d::ui::Widget::TextureResType::PLIST);
-		button1->setAnchorPoint(Point(0, 0));
-		button1->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
-		buttonbar->addChild(button1, 1, "MISSION_FUNCTION");
-		button1->setPosition(Vec2(buttonBarSize.width * 0.1f, button1->getSize().height * 0.1f));
-
-		auto button2 = cocos2d::ui::Button::create("2_town.png", "", "",
-			cocos2d::ui::Widget::TextureResType::PLIST);
-		button2->setAnchorPoint(Point(0, 0));
-		button2->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
-		buttonbar->addChild(button2, 1, "MAIN_FUNCTION");
-		button2->setPosition(Vec2(buttonBarSize.width * 0.25f, button1->getSize().height * 0.06f));
-
-		auto button3 = cocos2d::ui::Button::create("3_trainer.png", "", "",
-			cocos2d::ui::Widget::TextureResType::PLIST);
-		button3->setAnchorPoint(Point(0, 0));
-		button3->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
-		buttonbar->addChild(button3, 1, "TRAINER_FUNCTION");
-		button3->setPosition(Vec2(buttonBarSize.width * 0.4f, button1->getSize().height * 0.08f));
-
-		auto button4 = cocos2d::ui::Button::create("4_member.png", "", "",
-			cocos2d::ui::Widget::TextureResType::PLIST);
-		button4->setAnchorPoint(Point(0, 0));
-		button4->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
-		buttonbar->addChild(button4, 1, "MEMBER_FUNCTION");
-		button4->setPosition(Vec2(buttonBarSize.width * 0.56f, button1->getSize().height * 0.05f));
-
-		auto button5 = cocos2d::ui::Button::create("5_system.png", "", "",
-			cocos2d::ui::Widget::TextureResType::PLIST);
-		button5->setAnchorPoint(Point(0, 0));
-		button5->addTouchEventListener(CC_CALLBACK_2(MenuManager::buttonCallback, this));
-		buttonbar->addChild(button5, 1, "SYSTEM_FUNCTION");
-		button5->setPosition(Vec2(buttonBarSize.width * 0.71f, button1->getSize().height * 0.06f));
+		buttonbar->setVisible(true);
 
 		// Action
-		RotateTo *actionRotate = RotateTo::create(0.5f, 0.0f);
-		Switch->runAction(EaseBounceOut::create(actionRotate));
+		auto actionEnd = [&]()
+		{
+			switchOpen->setEnabled(true);
 
-		ScaleTo *actionScale = ScaleTo::create(0.5f, 1.0f);
+			buttonMission->setEnabled(true);
+			buttonTown->setEnabled(true);
+			buttonTrainer->setEnabled(true);
+			buttonMember->setEnabled(true);
+			buttonSystem->setEnabled(true);
+		};
+		CallFunc *actionCallFunc = CallFunc::create(actionEnd);
+		RotateTo *actionRotate = RotateTo::create(0.5f, 0.0f);
+		ScaleTo *actionScale = ScaleTo::create(0.5f, 1.0f, 1.0f);
+
+		switchOpen->runAction(Sequence::create(EaseBounceOut::create(actionRotate), actionCallFunc, nullptr));
 		buttonbar->runAction(EaseOut::create(actionScale, 10.0f));
 	}
 }
