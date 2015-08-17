@@ -77,22 +77,22 @@ void Member::update(float delta)
 {
 	RanPosition = { RandomHelper::random_real(-1.0f, 1.0f), RandomHelper::random_real(-1.0f, 1.0f) };
 	// tilemap over check
-	if (10 > Character->getPositionX() && RanPosition.x < 0)
-	{
-		RanPosition.x *= -1;
-	}
-	if (40 > Character->getPositionY() && RanPosition.y < 0)
-	{
-		RanPosition.y *= -1;
-	}
-	if (260 < Character->getPositionX() && RanPosition.x > 0)
-	{
-		RanPosition.x *= -1;
-	}
-	if (260 < Character->getPositionY() && RanPosition.y > 0)
-	{
-		RanPosition.y *= -1;
-	}
+	//if (10 > Character->getPositionX() && RanPosition.x < 0)
+	//{
+	//	RanPosition.x *= -1;
+	//}
+	//if (40 > Character->getPositionY() && RanPosition.y < 0)
+	//{
+	//	RanPosition.y *= -1;
+	//}
+	//if (260 < Character->getPositionX() && RanPosition.x > 0)
+	//{
+	//	RanPosition.x *= -1;
+	//}
+	//if (260 < Character->getPositionY() && RanPosition.y > 0)
+	//{
+	//	RanPosition.y *= -1;
+	//}
 
 	//this->collisionCheck();
 

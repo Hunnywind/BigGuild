@@ -21,6 +21,7 @@ public:
 	void initMenu();
 	void initButton();
 	void MissionButtonCallback(Ref *pSender, ui::Widget::TouchEventType type);
+	void BasicCallback(Ref *pSender, ui::Widget::TouchEventType type);
 	void gameCallback(Ref *sender);
 
 	void changeTap();
@@ -30,7 +31,5 @@ private:
 	int ButtonScrollSize;
 	bool isWAIT;
 };
-
-
 
 #endif
