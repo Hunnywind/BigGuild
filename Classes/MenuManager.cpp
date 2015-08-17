@@ -206,9 +206,10 @@ void MenuManager::changeMode()
 		Switch->setRotation(60.0f);
 
 		auto buttonbar = Sprite::createWithSpriteFrameName("open3.png");
-		buttonbar->setAnchorPoint(Point(0, 0));
+		buttonbar->setAnchorPoint(Point(1.0f, 0.0f));
 		Menuset->addChild(buttonbar, 0, "BAR");
 		buttonbar->setPosition(Switch->getPositionX(), (Switch->getSize().height / 2.0f) - (buttonbar->getContentSize().height / 2.0f));
+		buttonbar->setScale(0.0f, 1.0f);
 
 		// Button
 		Size buttonBarSize = buttonbar->getContentSize();
@@ -253,7 +254,7 @@ void MenuManager::changeMode()
 		RotateTo *actionRotate = RotateTo::create(0.5f, 0.0f);
 		Switch->runAction(EaseBounceOut::create(actionRotate));
 
-		MoveTo *actionMove = MoveTo::create(0.5f, Vec2(30.0f, (Switch->getSize().height / 2.0f) - (buttonBarSize.height / 2.0f)));
-		buttonbar->runAction(EaseOut::create(actionMove, 10.0f));
+		ScaleTo *actionScale = ScaleTo::create(0.5f, 1.0f);
+		buttonbar->runAction(EaseOut::create(actionScale, 10.0f));
 	}
 }
