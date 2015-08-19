@@ -1,0 +1,20 @@
+trainer_base : 60, 814
+experience_point : 174, 547
+
+(poke_unlock)
+poke_unlock1 : 116, 734
+poke_unlock2 : 264, 734
+poke_unlock3 : 415, 734
+
+(closeness_point)
+closeness_point1 : 117, 761
+closeness_point2 : 266, 761
+closeness_point3 : 418, 761
+
+(prev_next)
+prev: 109, 963
+next: 341, 961
+
+(버튼 없음)
+lv : 80, 550
+경치 : 318, 563
